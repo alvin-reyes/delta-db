@@ -1,4 +1,4 @@
-module delta-db
+module github.com/application-research/delta-db
 
 go 1.19
 
@@ -6,6 +6,7 @@ require (
 	github.com/application-research/filclient v0.4.0
 	github.com/filecoin-project/go-data-transfer v1.15.3
 	github.com/libp2p/go-libp2p v0.25.1
+	github.com/nsqio/go-nsq v1.1.0
 	gorm.io/driver/postgres v1.4.8
 	gorm.io/driver/sqlite v1.4.4
 	gorm.io/gorm v1.24.5
@@ -180,7 +181,6 @@ require (
 	github.com/multiformats/go-multistream v0.4.1 // indirect
 	github.com/multiformats/go-varint v0.0.7 // indirect
 	github.com/nkovacs/streamquote v1.0.0 // indirect
-	github.com/nsqio/go-nsq v1.1.0 // indirect
 	github.com/opencontainers/runtime-spec v1.0.3-0.20210326190908-1c3f411f0417 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/petar/GoLLRB v0.0.0-20210522233825-ae3b015fd3e9 // indirect

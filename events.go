@@ -1,7 +1,7 @@
 package main
 
 import (
-	"delta-db/db_models"
+	"github.com/application-research/delta-db/db_models"
 	"gorm.io/gorm"
 )
 
