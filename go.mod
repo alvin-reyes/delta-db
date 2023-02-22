@@ -1,4 +1,4 @@
-module delta-events
+module delta-db
 
 go 1.19
 
@@ -6,7 +6,6 @@ require (
 	github.com/application-research/filclient v0.4.0
 	github.com/filecoin-project/go-data-transfer v1.15.3
 	github.com/libp2p/go-libp2p v0.25.1
-	github.com/nsqio/go-nsq v1.1.0
 	gorm.io/driver/postgres v1.4.8
 	gorm.io/driver/sqlite v1.4.4
 	gorm.io/gorm v1.24.5

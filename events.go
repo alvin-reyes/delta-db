@@ -1,7 +1,7 @@
 package events
 
 import (
-	"delta-events/db_models"
+	"delta-db/db_models"
 	"gorm.io/gorm"
 )
 
@@ -38,7 +38,7 @@ func NewDeltaModels(deltaDbParams DeltaDBParams) DeltaEventDB {
 
 	var remoteDb *gorm.DB
 	if deltaDbParams.EnableMetricsCollection == true {
-		remoteDb, err = db_models.OpenRemoteDatabase(deltaDbParams.TimeDbDsn)
+		remoteDb, err = db_models.OpenMetricsCollectionDB(deltaDbParams.TimeDbDsn)
 		if err != nil {
 			panic(err)
 		}
@@ -54,6 +54,10 @@ func NewDeltaModels(deltaDbParams DeltaDBParams) DeltaEventDB {
 // allow dev to define their own delta log event types
 // allow dev to define their own delta log events
 // allow dev to define their own delta metrics
+
+func (deltaEventDB DeltaEventDB) LogInformation() {
+
+}
 
 //func produceMe() {
 //	config := nsq.NewConfig()

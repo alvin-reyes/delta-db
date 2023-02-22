@@ -30,7 +30,7 @@ func OpenLocalDatabase(dbDsn string) (*gorm.DB, error) {
 	return DB, nil
 }
 
-func OpenRemoteDatabase(dbDsn string) (*gorm.DB, error) {
+func OpenMetricsCollectionDB(dbDsn string) (*gorm.DB, error) {
 	// use postgres
 	var DB *gorm.DB
 	var err error

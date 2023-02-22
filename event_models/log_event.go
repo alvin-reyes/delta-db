@@ -1,7 +1,7 @@
 package db_models
 
 import (
-	"delta-events/db_models"
+	"delta-db/db_models"
 	"time"
 )
 
