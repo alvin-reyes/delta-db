@@ -1,4 +1,4 @@
-package events
+package main
 
 import (
 	"delta-db/db_models"
@@ -19,7 +19,7 @@ type DeltaEventsLogProducer interface {
 }
 
 var (
-	metricsTopicUrl = ""
+	metricsTopicUrl = "nsq-test.estuary.tech:4150"
 	primaryTopic    = "delta-metric-events"
 )
 
@@ -50,23 +50,3 @@ func NewDeltaModels(deltaDbParams DeltaDBParams) DeltaEventDB {
 		EnableMetricsCollection: deltaDbParams.EnableMetricsCollection,
 	}
 }
-
-// allow dev to define their own delta log event types
-// allow dev to define their own delta log events
-// allow dev to define their own delta metrics
-
-func (deltaEventDB DeltaEventDB) LogInformation() {
-
-}
-
-//func produceMe() {
-//	config := nsq.NewConfig()
-//	w, _ := nsq.NewProducer("127.0.0.1:4150", config)
-//	for i := 0; i < 1000; i++ {
-//		err := w.Publish("eMumba", []byte("test"+strconv.Itoa(i)))
-//		if err != nil {
-//			log.Panic("Could not connect")
-//		}
-//	}
-//	w.Stop()
-//}

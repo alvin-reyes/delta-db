@@ -180,6 +180,7 @@ require (
 	github.com/multiformats/go-multistream v0.4.1 // indirect
 	github.com/multiformats/go-varint v0.0.7 // indirect
 	github.com/nkovacs/streamquote v1.0.0 // indirect
+	github.com/nsqio/go-nsq v1.1.0 // indirect
 	github.com/opencontainers/runtime-spec v1.0.3-0.20210326190908-1c3f411f0417 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/petar/GoLLRB v0.0.0-20210522233825-ae3b015fd3e9 // indirect

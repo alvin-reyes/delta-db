@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2710842f-df65-4d47-827c-7e41be529daa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/event_models/base.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messaging/base.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messaging/consumer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messaging/producer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_models/log_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/event_models/log_event.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/events.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
@@ -51,7 +54,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/event_models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
