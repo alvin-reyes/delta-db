@@ -1,4 +1,4 @@
-package model
+package db_models
 
 import (
 	"github.com/libp2p/go-libp2p/core/protocol"
@@ -6,7 +6,6 @@ import (
 )
 
 // time series log events
-
 type LogEvent struct {
 	ID             int64     `gorm:"primaryKey"` // auto increment
 	LogEventType   string    `json:"log_event"`  // content, deal, piece_commitment, upload, miner, info

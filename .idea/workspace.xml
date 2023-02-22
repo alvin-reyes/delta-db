@@ -5,8 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2710842f-df65-4d47-827c-7e41be529daa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/extern/filecoin-ffi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/event_models/log_event.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messaging/producer.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/content.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/content_deal.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/content_deal_proposal.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal_proposal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/content_deal_proposal_parameters.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/content_miner.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_miner.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/content_wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_wallet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/instance_meta.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/instance_meta.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/log_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/log_event.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/piece_commitment.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/piece_commitment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/repair_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/repair_request.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +61,13 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/model" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/event_models" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/model" />
+      <recent name="$PROJECT_DIR$/event_models" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/model" />
@@ -60,6 +76,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
