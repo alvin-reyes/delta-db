@@ -2,8 +2,6 @@ package db_models
 
 import (
 	"fmt"
-	"github.com/application-research/filclient"
-	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -114,16 +112,3 @@ type RetryDealCount struct {
 }
 
 var ErrNoChannelID = fmt.Errorf("no data transfer channel id in deal")
-
-func (cd ContentDeal) ChannelID() (datatransfer.ChannelID, error) {
-	if cd.DTChan == "" {
-		return datatransfer.ChannelID{}, ErrNoChannelID
-	}
-
-	chid, err := filclient.ChannelIDFromString(cd.DTChan)
-	if err != nil {
-		err = fmt.Errorf("incorrectly formatted data transfer channel ID in contentDeal record: %w", err)
-		return datatransfer.ChannelID{}, err
-	}
-	return *chid, nil
-}
