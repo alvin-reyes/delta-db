@@ -1,7 +1,6 @@
 package db_models
 
 import (
-	"github.com/libp2p/go-libp2p/core/protocol"
 	"time"
 )
 
@@ -87,27 +86,27 @@ type ContentLog struct {
 
 // time series content deal events
 type ContentDealLog struct {
-	ID                  int64       `gorm:"primaryKey"` // auto increment
-	RequestingApiKey    string      `json:"requesting_api_key"`
-	ContentDealId       int64       `json:"content_deal_id"`
-	PropCid             string      `json:"propCid"`
-	DealUUID            string      `json:"dealUuid"`
-	Miner               string      `json:"miner"`
-	DealID              int64       `json:"dealId"`
-	Failed              bool        `json:"failed"`
-	Verified            bool        `json:"verified"`
-	Slashed             bool        `json:"slashed"`
-	FailedAt            time.Time   `json:"failedAt,omitempty"`
-	DTChan              string      `json:"dtChan" gorm:"index"`
-	TransferStarted     time.Time   `json:"transferStarted"`
-	TransferFinished    time.Time   `json:"transferFinished"`
-	OnChainAt           time.Time   `json:"onChainAt"`
-	SealedAt            time.Time   `json:"sealedAt"`
-	LastMessage         string      `json:"lastMessage"`
-	DealProtocolVersion protocol.ID `json:"deal_protocol_version"`
-	MinerVersion        string      `json:"miner_version,omitempty"`
-	CreatedAt           time.Time   `json:"created_at"` // auto set
-	UpdatedAt           time.Time   `json:"updated_at"`
+	ID                  int64     `gorm:"primaryKey"` // auto increment
+	RequestingApiKey    string    `json:"requesting_api_key"`
+	ContentDealId       int64     `json:"content_deal_id"`
+	PropCid             string    `json:"propCid"`
+	DealUUID            string    `json:"dealUuid"`
+	Miner               string    `json:"miner"`
+	DealID              int64     `json:"dealId"`
+	Failed              bool      `json:"failed"`
+	Verified            bool      `json:"verified"`
+	Slashed             bool      `json:"slashed"`
+	FailedAt            time.Time `json:"failedAt,omitempty"`
+	DTChan              string    `json:"dtChan" gorm:"index"`
+	TransferStarted     time.Time `json:"transferStarted"`
+	TransferFinished    time.Time `json:"transferFinished"`
+	OnChainAt           time.Time `json:"onChainAt"`
+	SealedAt            time.Time `json:"sealedAt"`
+	LastMessage         string    `json:"lastMessage"`
+	DealProtocolVersion string    `json:"deal_protocol_version"`
+	MinerVersion        string    `json:"miner_version,omitempty"`
+	CreatedAt           time.Time `json:"created_at"` // auto set
+	UpdatedAt           time.Time `json:"updated_at"`
 }
 
 type ContentMinerLog struct {

@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2710842f-df65-4d47-827c-7e41be529daa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/content_deal.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/log_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/log_event.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +31,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/messaging/consumer.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/db_models/log_event.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/events.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/db_models/content.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/messaging/producer.go" root0="FORCE_HIGHLIGHTING" />
