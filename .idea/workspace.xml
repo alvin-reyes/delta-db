@@ -12,8 +12,10 @@
       <change beforePath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content_miner.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_miner.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content_wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_wallet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event_models/log_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/event_models/log_event.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messaging/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/messaging/base.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messaging/consumer.go" beforeDir="false" afterPath="$PROJECT_DIR$/messaging/consumer.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

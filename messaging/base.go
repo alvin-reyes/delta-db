@@ -1,7 +1,7 @@
 package messaging
 
 var (
-	MetricsTopicUrl = "nsq-test.estuary.tech:4150"
+	MetricsTopicUrl = "145.40.77.207:4150"
 	PrimaryTopic    = "delta-metric-events"
 )
 

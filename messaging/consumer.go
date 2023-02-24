@@ -18,8 +18,3 @@ func NewDeltaMetricsMessageConsumer() *DeltaMetricsMessageConsumer {
 		Consumer: consumer,
 	}
 }
-
-func (c *DeltaMetricsMessageConsumer) Subscribe(topic string, channel string, handler nsq.HandlerFunc) error {
-	c.Consumer.AddHandler(handler)
-	return nil
-}

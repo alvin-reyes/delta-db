@@ -16,33 +16,33 @@ type ContentWallet struct {
 
 func (u *ContentWallet) BeforeSave(tx *gorm.DB) (err error) {
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		EventType:  "Content Wallet Save",
-		LogEventId: u.ID,
-		LogEvent:   fmt.Sprintf("ContentWallet %d saved", u.ID),
-		CreatedAt:  time.Time{},
-		UpdatedAt:  time.Time{},
+		LogEventType: "Content Wallet Save",
+		LogEventId:   u.ID,
+		LogEvent:     fmt.Sprintf("ContentWallet %d saved", u.ID),
+		CreatedAt:    time.Time{},
+		UpdatedAt:    time.Time{},
 	})
 	return
 }
 
 func (u *ContentWallet) BeforeCreate(tx *gorm.DB) (err error) {
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		EventType:  "ContentMiner Create",
-		LogEventId: u.ID,
-		LogEvent:   fmt.Sprintf("ContentWallet %d create", u.ID),
-		CreatedAt:  time.Time{},
-		UpdatedAt:  time.Time{},
+		LogEventType: "ContentMiner Create",
+		LogEventId:   u.ID,
+		LogEvent:     fmt.Sprintf("ContentWallet %d create", u.ID),
+		CreatedAt:    time.Time{},
+		UpdatedAt:    time.Time{},
 	})
 	return
 }
 
 func (u *ContentWallet) AfterSave(tx *gorm.DB) (err error) {
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		EventType:  "After ContentWallet Save",
-		LogEventId: u.ID,
-		LogEvent:   fmt.Sprintf("After ContentWallet %d saved", u.ID),
-		CreatedAt:  time.Time{},
-		UpdatedAt:  time.Time{},
+		LogEventType: "After ContentWallet Save",
+		LogEventId:   u.ID,
+		LogEvent:     fmt.Sprintf("After ContentWallet %d saved", u.ID),
+		CreatedAt:    time.Time{},
+		UpdatedAt:    time.Time{},
 	})
 	return
 }

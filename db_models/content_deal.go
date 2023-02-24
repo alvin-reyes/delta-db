@@ -31,33 +31,33 @@ type ContentDeal struct {
 
 func (u *ContentDeal) BeforeSave(tx *gorm.DB) (err error) {
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		EventType:  "ContentDeal Save",
-		LogEventId: u.ID,
-		LogEvent:   fmt.Sprintf("ContentDeal %d saved", u.ID),
-		CreatedAt:  time.Time{},
-		UpdatedAt:  time.Time{},
+		LogEventType: "ContentDeal Save",
+		LogEventId:   u.ID,
+		LogEvent:     fmt.Sprintf("ContentDeal %d saved", u.ID),
+		CreatedAt:    time.Time{},
+		UpdatedAt:    time.Time{},
 	})
 	return
 }
 
 func (u *ContentDeal) BeforeCreate(tx *gorm.DB) (err error) {
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		EventType:  "ContentDeal Create",
-		LogEventId: u.ID,
-		LogEvent:   fmt.Sprintf("ContentDeal %d create", u.ID),
-		CreatedAt:  time.Time{},
-		UpdatedAt:  time.Time{},
+		LogEventType: "ContentDeal Create",
+		LogEventId:   u.ID,
+		LogEvent:     fmt.Sprintf("ContentDeal %d create", u.ID),
+		CreatedAt:    time.Time{},
+		UpdatedAt:    time.Time{},
 	})
 	return
 }
 
 func (u *ContentDeal) AfterSave(tx *gorm.DB) (err error) {
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		EventType:  "After ContentDeal Save",
-		LogEventId: u.ID,
-		LogEvent:   fmt.Sprintf("After ContentDeal %d saved", u.ID),
-		CreatedAt:  time.Time{},
-		UpdatedAt:  time.Time{},
+		LogEventType: "After ContentDeal Save",
+		LogEventId:   u.ID,
+		LogEvent:     fmt.Sprintf("After ContentDeal %d saved", u.ID),
+		CreatedAt:    time.Time{},
+		UpdatedAt:    time.Time{},
 	})
 	return
 }

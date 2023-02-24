@@ -1,20 +1,38 @@
 package main
 
 import (
+	"encoding/json"
+	"github.com/application-research/delta-db/db_models"
+	"github.com/application-research/delta-db/messaging"
 	"github.com/nsqio/go-nsq"
 	"log"
+	"time"
 )
 
 func main() {
-	// Instantiate a new producer that publishes to the specified topic )
-	producer, err := nsq.NewProducer("nsq-test.estuary.tech:4150", nsq.NewConfig())
+	// Instantiate a new producer that publishes to the specified topic
+	producer, err := nsq.NewProducer(messaging.MetricsTopicUrl, nsq.NewConfig())
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Publish a message to the topic
-	message := []byte("Hello, NSQ!")
-	err = producer.Publish("my_topic", message)
+	data := db_models.Content{
+		ID:                0,
+		Name:              "",
+		Size:              0,
+		Cid:               "",
+		RequestingApiKey:  "",
+		PieceCommitmentId: 0,
+		Status:            "",
+		ConnectionMode:    "",
+		LastMessage:       "",
+		CreatedAt:         time.Time{},
+		UpdatedAt:         time.Time{},
+	}
+
+	message, err := json.Marshal(data)
+	err = producer.Publish(messaging.PrimaryTopic, message)
 	if err != nil {
 		log.Fatal(err)
 	}

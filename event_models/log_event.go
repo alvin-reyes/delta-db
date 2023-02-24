@@ -19,6 +19,7 @@ type LogEvent struct {
 // api
 type ContentUploadContentLog struct {
 	ID               int64             `gorm:"primaryKey"` // auto increment
+	NodeInfo         string            `json:"node_info"`
 	RequestingApiKey string            `json:"requesting_api_key"`
 	EventMessage     string            `json:"event_message"`
 	Content          db_models.Content `json:"content"`
@@ -28,6 +29,7 @@ type ContentUploadContentLog struct {
 
 type ContentCommitmentPieceLog struct {
 	ID                     int64                     `gorm:"primaryKey"` // auto increment
+	NodeInfo               string                    `json:"node_info"`
 	RequestingApiKey       string                    `json:"requesting_api_key"`
 	EventMessage           string                    `json:"event_message"`
 	Content                db_models.Content         `json:"content"`
@@ -38,6 +40,7 @@ type ContentCommitmentPieceLog struct {
 
 type ContentCommitmentPiecesLog struct {
 	ID                      int64                       `gorm:"primaryKey"` // auto increment
+	NodeInfo                string                      `json:"node_info"`
 	BatchRequestUUID        string                      `json:"batch_request_uuid"`
 	RequestingApiKey        string                      `json:"requesting_api_key"`
 	EventMessage            string                      `json:"event_message"`
@@ -49,6 +52,7 @@ type ContentCommitmentPiecesLog struct {
 
 type ContentProposalLog struct {
 	ID                  int64                         `gorm:"primaryKey"` // auto increment
+	NodeInfo            string                        `json:"node_info"`
 	RequestingApiKey    string                        `json:"requesting_api_key"`
 	EventMessage        string                        `json:"event_message"`
 	ContentDealProposal db_models.ContentDealProposal `json:"content_deal_proposal"`
@@ -58,6 +62,7 @@ type ContentProposalLog struct {
 
 type ContentAnnounceLog struct {
 	ID                  int64                         `gorm:"primaryKey"` // auto increment
+	NodeInfo            string                        `json:"node_info"`
 	RequestingApiKey    string                        `json:"requesting_api_key"`
 	EventMessage        string                        `json:"event_message"`
 	ContentDealProposal db_models.ContentDealProposal `json:"content_deal_proposal"`
@@ -67,6 +72,7 @@ type ContentAnnounceLog struct {
 
 type OpenStatsLog struct {
 	ID            int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo      string    `json:"node_info"`
 	RequesterInfo string    `json:"requester_info"`
 	CreatedAt     time.Time `json:"created_at"` // auto set
 	UpdatedAt     time.Time `json:"updated_at"`
@@ -74,6 +80,7 @@ type OpenStatsLog struct {
 
 type RepairRequestLog struct {
 	ID               int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo         string    `json:"node_info"`
 	RequestingApiKey string    `json:"requesting_api_key"`
 	EventMessage     string    `json:"event_message"`
 	CreatedAt        time.Time `json:"created_at"` // auto set
@@ -82,6 +89,7 @@ type RepairRequestLog struct {
 
 type NodeRequestLog struct {
 	ID            int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo      string    `json:"node_info"`
 	RequesterInfo string    `json:"requester_info"`
 	CreatedAt     time.Time `json:"created_at"` // auto set
 	UpdatedAt     time.Time `json:"updated_at"`
@@ -89,16 +97,23 @@ type NodeRequestLog struct {
 
 // job events
 type PieceCommitmentJobLog struct {
-	ID int64
+	ID       int64
+	NodeInfo string `json:"node_info"`
 }
 
 type StorageDealMakeJobLog struct {
+	ID       int64
+	NodeInfo string `json:"node_info"`
 }
 
 type DataTransferStatusJobLog struct {
+	ID       int64
+	NodeInfo string `json:"node_info"`
 }
 
 type InstanceMetaJobLog struct {
+	ID       int64
+	NodeInfo string `json:"node_info"`
 }
 
 // time series log events
