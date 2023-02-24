@@ -1,1 +1,1 @@
-package db_models
+package event_models

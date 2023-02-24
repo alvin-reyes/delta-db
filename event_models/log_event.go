@@ -1,4 +1,4 @@
-package db_models
+package event_models
 
 import (
 	"github.com/application-research/delta-db/db_models"
@@ -119,6 +119,7 @@ type InstanceMetaJobLog struct {
 // time series log events
 type ContentLog struct {
 	ID               int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo         string    `json:"node_info"`
 	RequestingApiKey string    `json:"requesting_api_key"`
 	ContentId        int64     `json:"content_id"`
 	CreatedAt        time.Time `json:"created_at"` // auto set
@@ -128,6 +129,7 @@ type ContentLog struct {
 // time series content deal events
 type ContentDealLog struct {
 	ID               int64                 `gorm:"primaryKey"` // auto increment
+	NodeInfo         string                `json:"node_info"`
 	RequestingApiKey string                `json:"requesting_api_key"`
 	ContentDealId    int64                 `json:"content_deal_id"`
 	ContentDeal      db_models.ContentDeal `json:"content_deal"`
@@ -137,6 +139,7 @@ type ContentDealLog struct {
 
 type ContentMinerLog struct {
 	ID               int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo         string    `json:"node_info"`
 	RequestingApiKey string    `json:"requesting_api_key"`
 	ContentMinerId   int64     `json:"content_miner_id"`
 	CreatedAt        time.Time `json:"created_at"` // auto set
@@ -145,6 +148,7 @@ type ContentMinerLog struct {
 
 type ContentPieceCommitmentLog struct {
 	ID                       int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo                 string    `json:"node_info"`
 	RequestingApiKey         string    `json:"requesting_api_key"`
 	ContentPieceCommitmentId int64     `json:"content_piece_commitment_id"`
 	RelatedContentId         int64     `json:"related_content_id"`
@@ -154,6 +158,7 @@ type ContentPieceCommitmentLog struct {
 
 type ContentDealProposalLog struct {
 	ID                    int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo              string    `json:"node_info"`
 	RequestingApiKey      string    `json:"requesting_api_key"`
 	ContentDealProposalID int64     `json:"content_deal_proposal_id"`
 	RelatedContentId      int64     `json:"related_content_id"`
