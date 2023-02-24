@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="2710842f-df65-4d47-827c-7e41be529daa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_models/log_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/event_models/log_event.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/content.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/content_deal.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/content_deal_proposal.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal_proposal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/content_miner.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_miner.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/content_wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_wallet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/events.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,14 +38,10 @@
     <setting file="file://$PROJECT_DIR$/messaging/consumer.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/db_models/log_event.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/events.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/db_models/content.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/messaging/producer.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/messaging/base.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/go.mod" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/db_models/content_deal.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/main.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/db_models/database.go" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/db_models/instance_meta.go" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -59,10 +62,11 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/db_models" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/db_models" />
       <recent name="$PROJECT_DIR$/event_models" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/model" />

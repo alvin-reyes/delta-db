@@ -21,13 +21,12 @@ type Content struct {
 }
 
 func (u *Content) BeforeSave(tx *gorm.DB) (err error) {
-	// log this before saving
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "Content Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("Content %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		EventType:  "Content Save",
+		LogEventId: u.ID,
+		LogEvent:   fmt.Sprintf("Content %d saved", u.ID),
+		CreatedAt:  time.Time{},
+		UpdatedAt:  time.Time{},
 	})
 	return
 }
@@ -36,22 +35,22 @@ func (u *Content) BeforeCreate(tx *gorm.DB) (err error) {
 	// check if it has a miner set
 
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "Content Create",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("Content %d create", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		EventType:  "Content Create",
+		LogEventId: u.ID,
+		LogEvent:   fmt.Sprintf("Content %d create", u.ID),
+		CreatedAt:  time.Time{},
+		UpdatedAt:  time.Time{},
 	})
 	return
 }
 
 func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "After Content Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("After content %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		EventType:  "After Content Save",
+		LogEventId: u.ID,
+		LogEvent:   fmt.Sprintf("After content %d saved", u.ID),
+		CreatedAt:  time.Time{},
+		UpdatedAt:  time.Time{},
 	})
 	return
 }

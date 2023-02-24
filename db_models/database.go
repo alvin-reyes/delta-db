@@ -2,33 +2,14 @@ package db_models
 
 import (
 	"fmt"
+	"time"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"time"
 )
 
-func OpenLocalDatabase(dbDsn string) (*gorm.DB, error) {
-	// use postgres
-	var DB *gorm.DB
-	var err error
-
-	if dbDsn[:8] == "postgres" {
-		DB, err = gorm.Open(postgres.Open(dbDsn), &gorm.Config{})
-	} else {
-		DB, err = gorm.Open(sqlite.Open(dbDsn), &gorm.Config{})
-	}
-
-	// generate new models.
-	ConfigureModels(DB) // create models.
-
-	if err != nil {
-		return nil, err
-	}
-	return DB, nil
-}
-
-func OpenMetricsCollectionDB(dbDsn string) (*gorm.DB, error) {
+func OpenDatabase(dbDsn string) (*gorm.DB, error) {
 	// use postgres
 	var DB *gorm.DB
 	var err error
@@ -49,7 +30,7 @@ func OpenMetricsCollectionDB(dbDsn string) (*gorm.DB, error) {
 }
 
 func ConfigureModels(db *gorm.DB) {
-	db.AutoMigrate(&Content{}, &ContentDeal{}, &PieceCommitment{}, &MinerInfo{}, &MinerPrice{}, &LogEvent{}, &ContentMiner{}, &ProcessContentCounter{}, &ContentWallet{}, &ContentDealProposalParameters{}, &Wallet{}, &ContentDealProposal{}, &InstanceMeta{})
+	db.AutoMigrate(&Content{}, &ContentDeal{}, &PieceCommitment{}, &MinerInfo{}, &MinerPrice{}, &LogEvent{}, &ContentMiner{}, &ProcessContentCounter{}, &ContentWallet{}, &ContentDealProposalParameters{}, &Wallet{}, &ContentDealProposal{}, &InstanceMeta{}, &RetryDealCount{})
 }
 
 type ProcessContentCounter struct {
@@ -104,11 +85,24 @@ type AdminUser struct {
 
 type RetryDealCount struct {
 	ID        int64     `gorm:"primaryKey"`
-	DealUUID  string    `json:"deal_uuid"`
-	Count     int64     `json:"count"`
-	LastError string    `json:"last_error"`
+	Type      string    `json:"type"`
+	OldId     int64     `json:"old_id"`
+	NewId     int64     `json:"new_id"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 var ErrNoChannelID = fmt.Errorf("no data transfer channel id in deal")
+
+//func (cd ContentDeal) ChannelID() (datatransfer.ChannelID, error) {
+//	if cd.DTChan == "" {
+//		return datatransfer.ChannelID{}, ErrNoChannelID
+//	}
+//
+//	chid, err := filclient.ChannelIDFromString(cd.DTChan)
+//	if err != nil {
+//		err = fmt.Errorf("incorrectly formatted data transfer channel ID in contentDeal record: %w", err)
+//		return datatransfer.ChannelID{}, err
+//	}
+//	return *chid, nil
+//}
