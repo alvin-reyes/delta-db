@@ -1,7 +1,7 @@
 package db_models
 
 import (
-	"delta-db/db_models"
+	"github.com/application-research/delta-db/db_models"
 	"time"
 )
 
@@ -89,6 +89,7 @@ type NodeRequestLog struct {
 
 // job events
 type PieceCommitmentJobLog struct {
+	ID int64
 }
 
 type StorageDealMakeJobLog struct {
