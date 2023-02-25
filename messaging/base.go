@@ -8,6 +8,9 @@ var (
 	producer        *DeltaMetricsMessageProducer
 )
 
+type DeltaMetricsTracer struct {
+	Producer *DeltaMetricsMessageProducer
+}
 type DeltaMetricsBaseMessage struct {
 	ObjectType string      `json:"object_type"`
 	Object     interface{} `json:"object"`
@@ -17,7 +20,13 @@ func init() {
 	producer = NewDeltaMetricsMessageProducer()
 }
 
-func (p *DeltaMetricsBaseMessage) Trace(message DeltaMetricsBaseMessage) error {
+func NewDeltaMetricsTracer() *DeltaMetricsTracer {
+	return &DeltaMetricsTracer{
+		Producer: producer,
+	}
+}
+
+func (p *DeltaMetricsTracer) Trace(message DeltaMetricsBaseMessage) error {
 	messageBytes, err := json.Marshal(message)
 	if err != nil {
 		return err
@@ -26,7 +35,7 @@ func (p *DeltaMetricsBaseMessage) Trace(message DeltaMetricsBaseMessage) error {
 	return nil
 }
 
-func (p *DeltaMetricsBaseMessage) TraceMessageString(message string) error {
+func (p *DeltaMetricsTracer) TraceMessageString(message string) error {
 	err := producer.Publish([]byte(message))
 	if err != nil {
 		return err
@@ -34,7 +43,7 @@ func (p *DeltaMetricsBaseMessage) TraceMessageString(message string) error {
 	return nil
 }
 
-func (p *DeltaMetricsBaseMessage) TraceMessage(message []byte) error {
+func (p *DeltaMetricsTracer) TraceMessage(message []byte) error {
 	err := producer.Publish(message)
 	if err != nil {
 		return err
