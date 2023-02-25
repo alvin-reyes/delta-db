@@ -67,6 +67,7 @@ type MinerPrice struct {
 
 type Wallet struct {
 	ID         int64     `gorm:"primaryKey"`
+	UuId       string    `json:"uuid"`
 	Addr       string    `json:"addr"`
 	Owner      string    `json:"owner"`
 	KeyType    string    `json:"key_type"`
