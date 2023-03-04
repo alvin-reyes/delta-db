@@ -6,6 +6,22 @@ import (
 )
 
 // LogEvent time series log events
+// `LogEvent` is a struct with fields `ID`, `LogEventType`, `LogEventObject`, `LogEventId`, `LogEvent`, `CreatedAt`, and
+// `UpdatedAt`.
+//
+// The `gorm:"primaryKey"` tag tells GORM that the `ID` field is the primary key for the table.
+//
+// The `json:"log_event"` tag tells GORM that the `LogEventType` field should be named `log_event` when it is serialized to
+// JSON.
+//
+// The `json:"created_at"
+// @property {int64} ID - The primary key for the table.
+// @property {string} LogEventType - The type of event that occurred.
+// @property {string} LogEventObject - content, deal, piece_commitment, upload, miner, info
+// @property {int64} LogEventId - The id of the object that the event is about.
+// @property {string} LogEvent - The type of event that occurred.
+// @property CreatedAt - The time the event was created
+// @property UpdatedAt - The time the event was created
 type LogEvent struct {
 	ID             int64     `gorm:"primaryKey"` // auto increment
 	LogEventType   string    `json:"log_event"`  // content, deal, piece_commitment, upload, miner, info
@@ -17,6 +33,15 @@ type LogEvent struct {
 }
 
 // api
+// `ContentUploadContentLog` is a type that has a `Content` field of type `db_models.Content` and a `CreatedAt` field of
+// type `time.Time`.
+// @property {int64} ID - The primary key for the table.
+// @property {string} NodeInfo - The node that is requesting the content upload.
+// @property {string} RequestingApiKey - The api key of the node that is requesting the content
+// @property {string} EventMessage - The message that will be logged.
+// @property Content - The content that was uploaded.
+// @property CreatedAt - The time the log was created
+// @property UpdatedAt - This is the time the record was last updated.
 type ContentUploadContentLog struct {
 	ID               int64             `gorm:"primaryKey"` // auto increment
 	NodeInfo         string            `json:"node_info"`
@@ -27,6 +52,26 @@ type ContentUploadContentLog struct {
 	UpdatedAt        time.Time         `json:"updated_at"`
 }
 
+// `ContentCommitmentPieceLog` is a struct that contains a `Content` and a `PieceCommitment` and a `NodeInfo` and a
+// `RequestingApiKey` and a `EventMessage` and a `CreatedAt` and a `UpdatedAt`.
+// @property {int64} ID - The primary key for the table.
+// @property {string} NodeInfo - The node that is logging the event
+// @property {string} RequestingApiKey - The api key of the node that is requesting the content
+// @property {string} EventMessage - A string that describes the event that occurred.
+// @property Content - The content that was committed to.
+// @property ContentPieceCommitment - The piece commitment that was created for the content.
+// @property CreatedAt - The time the log was created
+// @property UpdatedAt - The time the record was last updated.
+// `ContentCommitmentPieceLog` is a struct that contains a `Content` and a `PieceCommitment` and a `NodeInfo` and a
+// `RequestingApiKey` and a `EventMessage` and a `CreatedAt` and a `UpdatedAt`.
+// @property {int64} ID - The primary key for the table.
+// @property {string} NodeInfo - The node that is making the request
+// @property {string} RequestingApiKey - The api key of the node that is requesting the content
+// @property {string} EventMessage - A string that describes the event that occurred.
+// @property Content - The content that was committed to.
+// @property ContentPieceCommitment - The piece commitment that was created for the content.
+// @property CreatedAt - The time the log was created
+// @property UpdatedAt - The time the record was last updated.
 type ContentCommitmentPieceLog struct {
 	ID                     int64                     `gorm:"primaryKey"` // auto increment
 	NodeInfo               string                    `json:"node_info"`
@@ -38,6 +83,16 @@ type ContentCommitmentPieceLog struct {
 	UpdatedAt              time.Time                 `json:"updated_at"`
 }
 
+// `ContentCommitmentPiecesLog` is a struct that contains a `Content` and a slice of `PieceCommitment`s.
+// @property {int64} ID - auto incrementing primary key
+// @property {string} NodeInfo - The node that is logging the event
+// @property {string} BatchRequestUUID - The UUID of the batch request that this content commitment was part of.
+// @property {string} RequestingApiKey - The api key of the node that made the request
+// @property {string} EventMessage - The message that was sent to the event bus
+// @property Content - The content that was committed to.
+// @property {[]db_models.PieceCommitment} ContentPieceCommitments - This is a slice of PieceCommitment structs.
+// @property CreatedAt - The time the event was created
+// @property UpdatedAt - The time the record was last updated.
 type ContentCommitmentPiecesLog struct {
 	ID                      int64                       `gorm:"primaryKey"` // auto increment
 	NodeInfo                string                      `json:"node_info"`
@@ -116,7 +171,7 @@ type InstanceMetaJobLog struct {
 	NodeInfo string `json:"node_info"`
 }
 
-// time series log events
+// ContentLog time series log events
 type ContentLog struct {
 	ID               int64     `gorm:"primaryKey"` // auto increment
 	NodeInfo         string    `json:"node_info"`
@@ -126,7 +181,7 @@ type ContentLog struct {
 	UpdatedAt        time.Time `json:"updated_at"`
 }
 
-// time series content deal events
+// ContentDealLog time series content deal events
 type ContentDealLog struct {
 	ID               int64                 `gorm:"primaryKey"` // auto increment
 	NodeInfo         string                `json:"node_info"`

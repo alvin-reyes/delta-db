@@ -7,8 +7,9 @@ import (
 )
 
 type ContentDeal struct {
-	ID                  int64     `gorm:"primaryKey"`
-	Content             int64     `json:"content" gorm:"index:,option:CONCURRENTLY"`
+	ID      int64 `gorm:"primaryKey"`
+	Content int64 `json:"content" gorm:"index:,option:CONCURRENTLY"`
+	//Content             Content   `gorm:"references:ID"`
 	PropCid             string    `json:"propCid"`
 	DealUUID            string    `json:"dealUuid"`
 	Miner               string    `json:"miner"`
