@@ -115,6 +115,16 @@ type ContentProposalLog struct {
 	UpdatedAt           time.Time                     `json:"updated_at"`
 }
 
+type ContentDealProposalParameterLog struct {
+	ID                              int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo                        string    `json:"node_info"`
+	RequestingApiKey                string    `json:"requesting_api_key"`
+	ContentDealProposalParameterLog int64     `json:"content_deal_proposal_id"`
+	RelatedContentId                int64     `json:"related_content_id"`
+	CreatedAt                       time.Time `json:"created_at"` // auto set
+	UpdatedAt                       time.Time `json:"updated_at"`
+}
+
 type ContentAnnounceLog struct {
 	ID                  int64                         `gorm:"primaryKey"` // auto increment
 	NodeInfo            string                        `json:"node_info"`

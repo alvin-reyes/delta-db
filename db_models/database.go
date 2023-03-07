@@ -2,6 +2,7 @@ package db_models
 
 import (
 	"fmt"
+	"gorm.io/gorm/logger"
 	"time"
 
 	"gorm.io/driver/postgres"
@@ -15,9 +16,13 @@ func OpenDatabase(dbDsn string) (*gorm.DB, error) {
 	var err error
 
 	if dbDsn[:8] == "postgres" {
-		DB, err = gorm.Open(postgres.Open(dbDsn), &gorm.Config{})
+		DB, err = gorm.Open(postgres.Open(dbDsn), &gorm.Config{
+			Logger: logger.Default.LogMode(logger.Silent),
+		})
 	} else {
-		DB, err = gorm.Open(sqlite.Open(dbDsn), &gorm.Config{})
+		DB, err = gorm.Open(sqlite.Open(dbDsn), &gorm.Config{
+			Logger: logger.Default.LogMode(logger.Silent),
+		})
 	}
 
 	// generate new models.
