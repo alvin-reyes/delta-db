@@ -41,8 +41,8 @@ func (u *RepairRequest) AfterSave(tx *gorm.DB) (err error) {
 		LogEventType: "After Content Save",
 		LogEventId:   u.ID,
 		LogEvent:     fmt.Sprintf("After content %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		CreatedAt:    time.Now(),
+		UpdatedAt:    time.Now(),
 	})
 	return
 }

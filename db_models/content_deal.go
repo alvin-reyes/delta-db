@@ -1,7 +1,7 @@
 package db_models
 
 import (
-	"fmt"
+	"encoding/json"
 	"gorm.io/gorm"
 	"time"
 )
@@ -30,35 +30,15 @@ type ContentDeal struct {
 	UpdatedAt           time.Time `json:"updated_at"`
 }
 
-func (u *ContentDeal) BeforeSave(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentDeal Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentDeal %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
-func (u *ContentDeal) BeforeCreate(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentDeal Create",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentDeal %d create", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
 func (u *ContentDeal) AfterSave(tx *gorm.DB) (err error) {
+	messageBytes, err := json.Marshal(u)
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "After ContentDeal Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("After ContentDeal %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		LogEventType:   "ContentDeal",
+		LogEventObject: messageBytes,
+		LogEventId:     u.ID,
+		Collected:      false,
+		CreatedAt:      time.Now(),
+		UpdatedAt:      time.Now(),
 	})
 	return
 }

@@ -1,6 +1,7 @@
 package db_models
 
 import (
+	"encoding/json"
 	"fmt"
 	"gorm.io/gorm"
 	"time"
@@ -42,12 +43,15 @@ func (u *PieceCommitment) BeforeCreate(tx *gorm.DB) (err error) {
 }
 
 func (u *PieceCommitment) AfterSave(tx *gorm.DB) (err error) {
+	// log this on the event log table
+	messageBytes, err := json.Marshal(u)
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "After ContentMiner Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("After ContentMiner %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		LogEventType:   "PieceCommitment",
+		LogEventObject: messageBytes,
+		LogEventId:     u.ID,
+		Collected:      false,
+		CreatedAt:      time.Now(),
+		UpdatedAt:      time.Now(),
 	})
 	return
 }

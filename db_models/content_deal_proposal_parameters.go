@@ -1,7 +1,7 @@
 package db_models
 
 import (
-	"fmt"
+	"encoding/json"
 	"gorm.io/gorm"
 	"time"
 )
@@ -20,35 +20,15 @@ type ContentDealProposalParameters struct {
 	UpdatedAt          time.Time `json:"updated_at" json:"updated-at"`
 }
 
-func (u *ContentDealProposalParameters) BeforeSave(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentDealProposalParameters Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentDealProposalParameters %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
-func (u *ContentDealProposalParameters) BeforeCreate(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentDealProposalParameters Create",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentDealProposalParameters %d create", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
 func (u *ContentDealProposalParameters) AfterSave(tx *gorm.DB) (err error) {
+	messageBytes, err := json.Marshal(u)
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "After ContentDealProposalParameters Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("After ContentDealProposalParameters %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		LogEventType:   "ContentDealProposalParameters",
+		LogEventObject: messageBytes,
+		LogEventId:     u.ID,
+		Collected:      false,
+		CreatedAt:      time.Now(),
+		UpdatedAt:      time.Now(),
 	})
 	return
 }

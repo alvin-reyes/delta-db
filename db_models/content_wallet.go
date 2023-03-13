@@ -1,7 +1,7 @@
 package db_models
 
 import (
-	"fmt"
+	"encoding/json"
 	"gorm.io/gorm"
 	"time"
 )
@@ -14,35 +14,20 @@ type ContentWallet struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func (u *ContentWallet) BeforeSave(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "Content Wallet Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentWallet %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
-func (u *ContentWallet) BeforeCreate(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentMiner Create",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentWallet %d create", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
 func (u *ContentWallet) AfterSave(tx *gorm.DB) (err error) {
+
+	if u.Wallet == "" {
+		return
+	}
+
+	messageBytes, err := json.Marshal(u)
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "After ContentWallet Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("After ContentWallet %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		LogEventType:   "ContentWallet",
+		LogEventObject: messageBytes,
+		LogEventId:     u.ID,
+		Collected:      false,
+		CreatedAt:      time.Now(),
+		UpdatedAt:      time.Now(),
 	})
 	return
 }

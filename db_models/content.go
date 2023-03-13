@@ -1,6 +1,8 @@
 package db_models
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"gorm.io/gorm"
 	"time"
@@ -20,35 +22,24 @@ type Content struct {
 	UpdatedAt         time.Time `json:"updated_at"`
 }
 
-func (u *Content) BeforeSave(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentDeal Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentDeal %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
-func (u *Content) BeforeCreate(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentDeal Create",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentDeal %d create", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
-
 func (u *Content) AfterSave(tx *gorm.DB) (err error) {
+
+	// log this on the event log table
+	messageBytes, err := json.Marshal(u)
 	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "After ContentDeal Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("After ContentDeal %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		LogEventType:   "Content",
+		LogEventObject: messageBytes,
+		LogEventId:     u.ID,
+		LogEvent:       fmt.Sprintf("Content %d saved", u.ID),
+		Collected:      false,
+		CreatedAt:      time.Now(),
+		UpdatedAt:      time.Now(),
 	})
 	return
+}
+
+func Transcode(in, out interface{}) {
+	buf := new(bytes.Buffer)
+	json.NewEncoder(buf).Encode(in)
+	json.NewDecoder(buf).Decode(out)
 }
