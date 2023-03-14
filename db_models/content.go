@@ -23,7 +23,8 @@ type Content struct {
 func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
-	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+	// get the latest instance info based on created_at
+	tx.Model(&InstanceMeta{}).Where("id > 0").First(&instanceFromDb)
 
 	if instanceFromDb.ID == 0 {
 		return

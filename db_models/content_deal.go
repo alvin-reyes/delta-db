@@ -33,7 +33,7 @@ type ContentDeal struct {
 func (u *ContentDeal) AfterCreate(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
-	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+	tx.Model(&InstanceMeta{}).Where("id > 0").First(&instanceFromDb)
 
 	if instanceFromDb.ID == 0 {
 		return

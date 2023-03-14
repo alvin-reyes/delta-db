@@ -12,11 +12,8 @@
       <change beforePath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content_miner.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_miner.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content_wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_wallet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/instance_meta.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/instance_meta.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/log_models.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/log_models.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/piece_commitment.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/piece_commitment.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/wallet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
