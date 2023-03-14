@@ -1,14 +1,16 @@
 package db_models
 
 import (
-	"encoding/json"
-	"gorm.io/gorm"
 	"time"
 )
 
 type InstanceMeta struct {
 	// gorm id
 	ID                               int64     `gorm:"primary_key" json:"id"`
+	InstanceHostName                 string    `json:"instance_host_name"`
+	InstanceNodeName                 string    `json:"instance_node_name"`
+	OSDetails                        string    `json:"os_details"`
+	PublicIp                         string    `json:"public_ip"`
 	MemoryLimit                      uint64    `json:"memory_limit"`
 	CpuLimit                         uint64    `json:"cpu_limit"`
 	StorageLimit                     uint64    `json:"storage_limit"`
@@ -27,26 +29,4 @@ type InstanceMeta struct {
 	BytesPerCpu                      uint64    `json:"bytes_per_cpu"`
 	CreatedAt                        time.Time `json:"created_at"`
 	UpdatedAt                        time.Time `json:"updated_at"`
-}
-
-func (u *InstanceMeta) BeforeSave(tx *gorm.DB) (err error) {
-	return
-}
-
-func (u *InstanceMeta) BeforeCreate(tx *gorm.DB) (err error) {
-	return
-}
-
-func (u *InstanceMeta) AfterSave(tx *gorm.DB) (err error) {
-	// log this on the event log table
-	messageBytes, err := json.Marshal(u)
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType:   "InstanceMeta",
-		LogEventObject: messageBytes,
-		LogEventId:     u.ID,
-		Collected:      false,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	})
-	return
 }

@@ -2,7 +2,6 @@ package db_models
 
 import (
 	"encoding/json"
-	"fmt"
 	"gorm.io/gorm"
 	"time"
 )
@@ -20,38 +19,42 @@ type PieceCommitment struct {
 	UpdatedAt         time.Time `json:"updated_at"`
 }
 
-func (u *PieceCommitment) BeforeSave(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentMiner Save",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentMiner %d saved", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
+func (u *PieceCommitment) AfterCreate(tx *gorm.DB) (err error) {
 
-func (u *PieceCommitment) BeforeCreate(tx *gorm.DB) (err error) {
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType: "ContentMiner Create",
-		LogEventId:   u.ID,
-		LogEvent:     fmt.Sprintf("ContentMiner %d create", u.ID),
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
-	})
-	return
-}
+	var pieceComm PieceCommitment
+	tx.Model(&PieceCommitment{}).Where("id = ?", u.ID).First(&pieceComm)
 
-func (u *PieceCommitment) AfterSave(tx *gorm.DB) (err error) {
-	// log this on the event log table
-	messageBytes, err := json.Marshal(u)
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType:   "PieceCommitment",
-		LogEventObject: messageBytes,
-		LogEventId:     u.ID,
-		Collected:      false,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	})
+	if pieceComm.ID == 0 {
+		return
+	}
+
+	// get instance info
+	ip, err := GetPublicIP()
+	if err != nil {
+		return
+	}
+	log := PieceCommitmentLog{
+		Cid:                            pieceComm.Cid,
+		Piece:                          pieceComm.Piece,
+		Size:                           pieceComm.Size,
+		PaddedPieceSize:                pieceComm.PaddedPieceSize,
+		UnPaddedPieceSize:              pieceComm.UnPaddedPieceSize,
+		Status:                         pieceComm.Status,
+		LastMessage:                    pieceComm.LastMessage,
+		NodeInfo:                       GetHostname(),
+		RequesterInfo:                  ip,
+		SystemContentPieceCommitmentId: u.ID,
+		CreatedAt:                      time.Now(),
+		UpdatedAt:                      time.Now(),
+	}
+
+	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
+		ObjectType: "PieceCommitmentLog",
+		Object:     log,
+	}
+
+	messageBytes, err := json.Marshal(deltaMetricsBaseMessage)
+	producer.Publish(messageBytes)
+
 	return
 }

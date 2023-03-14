@@ -10,7 +10,7 @@ type DeltaMetricsMessageConsumer struct {
 }
 
 func NewDeltaMetricsMessageConsumer() *DeltaMetricsMessageConsumer {
-	consumer, err := nsq.NewConsumer(PrimaryTopic, MetricsTopicUrl, nsq.NewConfig())
+	consumer, err := nsq.NewConsumer(PrimaryTopic, PrimaryChannel, nsq.NewConfig())
 	if err != nil {
 		log.Fatalf("Could not create consumer: %v", err)
 	}

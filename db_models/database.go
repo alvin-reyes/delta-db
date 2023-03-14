@@ -2,6 +2,7 @@ package db_models
 
 import (
 	"fmt"
+	"github.com/application-research/delta-db/messaging"
 	"gorm.io/gorm/logger"
 	"time"
 
@@ -9,6 +10,17 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
+
+var producer *messaging.DeltaMetricsMessageProducer
+
+type DeltaMetricsBaseMessage struct {
+	ObjectType string      `json:"object_type"`
+	Object     interface{} `json:"object"`
+}
+
+func init() {
+	producer = messaging.NewDeltaMetricsMessageProducer()
+}
 
 func OpenDatabase(dbDsn string) (*gorm.DB, error) {
 	// use postgres
@@ -35,7 +47,7 @@ func OpenDatabase(dbDsn string) (*gorm.DB, error) {
 }
 
 func ConfigureModels(db *gorm.DB) {
-	db.AutoMigrate(&Content{}, &ContentDeal{}, &PieceCommitment{}, &MinerInfo{}, &MinerPrice{}, &LogEvent{}, &ContentMiner{}, &ProcessContentCounter{}, &ContentWallet{}, &ContentDealProposalParameters{}, &Wallet{}, &ContentDealProposal{}, &InstanceMeta{}, &RetryDealCount{})
+	db.AutoMigrate(&Content{}, &ContentDeal{}, &PieceCommitment{}, &MinerInfo{}, &MinerPrice{}, &messaging.LogEvent{}, &ContentMiner{}, &ProcessContentCounter{}, &ContentWallet{}, &ContentDealProposalParameters{}, &Wallet{}, &ContentDealProposal{}, &InstanceMeta{}, &RetryDealCount{})
 }
 
 type ProcessContentCounter struct {
@@ -68,17 +80,6 @@ type MinerPrice struct {
 	MinerVersion  string    `json:"miner_version"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`
-}
-
-type Wallet struct {
-	ID         int64     `gorm:"primaryKey"`
-	UuId       string    `json:"uuid"`
-	Addr       string    `json:"addr"`
-	Owner      string    `json:"owner"`
-	KeyType    string    `json:"key_type"`
-	PrivateKey string    `json:"private_key"`
-	CreatedAt  time.Time `json:"created_at"`
-	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 type AdminUser struct {

@@ -14,20 +14,38 @@ type ContentMiner struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func (u *ContentMiner) AfterSave(tx *gorm.DB) (err error) {
+func (u *ContentMiner) AfterCreate(tx *gorm.DB) (err error) {
 
-	if u.Miner == "" {
+	var contentMiner ContentMiner
+	tx.Model(&ContentMiner{}).Where("id = ?", u.ID).First(&contentMiner)
+
+	if contentMiner.ID == 0 {
 		return
 	}
 
-	messageBytes, err := json.Marshal(u)
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType:   "ContentMiner",
-		LogEventObject: messageBytes,
-		LogEventId:     u.ID,
-		Collected:      false,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	})
+	// get instance info
+	ip, err := GetPublicIP()
+	if err != nil {
+		return
+	}
+
+	log := ContentMinerLog{
+		Content:              contentMiner.Content,
+		Miner:                contentMiner.Miner,
+		NodeInfo:             GetHostname(),
+		RequesterInfo:        ip,
+		SystemContentMinerId: u.ID,
+		CreatedAt:            time.Now(),
+		UpdatedAt:            time.Now(),
+	}
+
+	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
+		ObjectType: "ContentMinerLog",
+		Object:     log,
+	}
+
+	messageBytes, err := json.Marshal(deltaMetricsBaseMessage)
+	producer.Publish(messageBytes)
+
 	return
 }

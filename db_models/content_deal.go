@@ -30,15 +30,54 @@ type ContentDeal struct {
 	UpdatedAt           time.Time `json:"updated_at"`
 }
 
-func (u *ContentDeal) AfterSave(tx *gorm.DB) (err error) {
-	messageBytes, err := json.Marshal(u)
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType:   "ContentDeal",
-		LogEventObject: messageBytes,
-		LogEventId:     u.ID,
-		Collected:      false,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	})
+func (u *ContentDeal) AfterCreate(tx *gorm.DB) (err error) {
+
+	var contentDealLog ContentDeal
+	tx.Model(&ContentDeal{}).Where("id = ?", u.ID).First(&contentDealLog)
+
+	if contentDealLog.ID == 0 {
+		return
+	}
+	// get instance info
+	ip, err := GetPublicIP()
+	if err != nil {
+		return
+	}
+
+	log := ContentDealLog{
+		Content:             contentDealLog.Content,
+		PropCid:             contentDealLog.PropCid,
+		DealUUID:            contentDealLog.DealUUID,
+		Miner:               contentDealLog.Miner,
+		DealID:              contentDealLog.DealID,
+		Failed:              contentDealLog.Failed,
+		Verified:            contentDealLog.Verified,
+		Slashed:             contentDealLog.Slashed,
+		FailedAt:            contentDealLog.FailedAt,
+		DTChan:              contentDealLog.DTChan,
+		TransferStarted:     contentDealLog.TransferStarted,
+		TransferFinished:    contentDealLog.TransferFinished,
+		OnChainAt:           contentDealLog.OnChainAt,
+		SealedAt:            contentDealLog.SealedAt,
+		LastMessage:         contentDealLog.LastMessage,
+		DealProtocolVersion: contentDealLog.DealProtocolVersion,
+		MinerVersion:        contentDealLog.MinerVersion,
+		NodeInfo:            GetHostname(),
+		RequesterInfo:       ip,
+		SystemContentDealId: contentDealLog.ID,
+		CreatedAt:           time.Now(),
+		UpdatedAt:           time.Now(),
+	}
+
+	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
+		ObjectType: "ContentDealLog",
+		Object:     log,
+	}
+
+	messageBytes, err := json.Marshal(deltaMetricsBaseMessage)
+	if err != nil {
+		return err
+	}
+	producer.Publish(messageBytes)
 	return
 }

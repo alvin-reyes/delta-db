@@ -20,15 +20,43 @@ type ContentDealProposalParameters struct {
 	UpdatedAt          time.Time `json:"updated_at" json:"updated-at"`
 }
 
-func (u *ContentDealProposalParameters) AfterSave(tx *gorm.DB) (err error) {
-	messageBytes, err := json.Marshal(u)
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType:   "ContentDealProposalParameters",
-		LogEventObject: messageBytes,
-		LogEventId:     u.ID,
-		Collected:      false,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	})
+func (u *ContentDealProposalParameters) AfterCreate(tx *gorm.DB) (err error) {
+
+	var contentDealProposalParams ContentDealProposalParameters
+	tx.Model(&ContentDealProposalParameters{}).Where("id = ?", u.ID).First(&contentDealProposalParams)
+
+	if contentDealProposalParams.ID == 0 {
+		return
+	}
+
+	// get instance info
+	ip, err := GetPublicIP()
+	if err != nil {
+		return
+	}
+	log := ContentDealProposalParametersLog{
+		Content:                               contentDealProposalParams.Content,
+		Label:                                 contentDealProposalParams.Label,
+		Duration:                              contentDealProposalParams.Duration,
+		StartEpoch:                            contentDealProposalParams.StartEpoch,
+		EndEpoch:                              contentDealProposalParams.EndEpoch,
+		TransferParams:                        contentDealProposalParams.TransferParams,
+		RemoveUnsealedCopy:                    contentDealProposalParams.RemoveUnsealedCopy,
+		SkipIPNIAnnounce:                      contentDealProposalParams.SkipIPNIAnnounce,
+		NodeInfo:                              GetHostname(),
+		RequesterInfo:                         ip,
+		SystemContentDealProposalParametersId: u.ID,
+		CreatedAt:                             time.Now(),
+		UpdatedAt:                             time.Now(),
+	}
+
+	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
+		ObjectType: "ContentDealProposalParametersLog",
+		Object:     log,
+	}
+
+	messageBytes, err := json.Marshal(deltaMetricsBaseMessage)
+	producer.Publish(messageBytes)
+
 	return
 }

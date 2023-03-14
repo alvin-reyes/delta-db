@@ -1,9 +1,7 @@
 package db_models
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 	"gorm.io/gorm"
 	"time"
 )
@@ -24,22 +22,44 @@ type Content struct {
 
 func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 
-	// log this on the event log table
-	messageBytes, err := json.Marshal(u)
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType:   "Content",
-		LogEventObject: messageBytes,
-		LogEventId:     u.ID,
-		LogEvent:       fmt.Sprintf("Content %d saved", u.ID),
-		Collected:      false,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	})
-	return
-}
+	var contentFromDb Content
+	tx.Model(&Content{}).Where("id = ?", u.ID).First(&contentFromDb)
 
-func Transcode(in, out interface{}) {
-	buf := new(bytes.Buffer)
-	json.NewEncoder(buf).Encode(in)
-	json.NewDecoder(buf).Decode(out)
+	if contentFromDb.ID == 0 {
+		return
+	}
+	// get instance info
+	ip, err := GetPublicIP()
+	if err != nil {
+		return
+	}
+
+	log := ContentLog{
+		Name:              contentFromDb.Name,
+		Size:              contentFromDb.Size,
+		Cid:               contentFromDb.Cid,
+		RequestingApiKey:  contentFromDb.RequestingApiKey,
+		PieceCommitmentId: contentFromDb.PieceCommitmentId,
+		Status:            contentFromDb.Status,
+		ConnectionMode:    contentFromDb.ConnectionMode,
+		LastMessage:       contentFromDb.LastMessage,
+		NodeInfo:          GetHostname(),
+		RequesterInfo:     ip,
+		SystemContentId:   contentFromDb.ID,
+		CreatedAt:         time.Now(),
+		UpdatedAt:         time.Now(),
+	}
+
+	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
+		ObjectType: "ContentLog",
+		Object:     log,
+	}
+
+	messageBytes, err := json.Marshal(deltaMetricsBaseMessage)
+	if err != nil {
+		return err
+	}
+	producer.Publish(messageBytes)
+
+	return
 }

@@ -14,20 +14,37 @@ type ContentWallet struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func (u *ContentWallet) AfterSave(tx *gorm.DB) (err error) {
+func (u *ContentWallet) AfterCreate(tx *gorm.DB) (err error) {
 
-	if u.Wallet == "" {
+	var contentWallet ContentWallet
+	tx.Model(&ContentWallet{}).Where("id = ?", u.ID).First(&contentWallet)
+
+	if contentWallet.ID == 0 {
 		return
 	}
 
-	messageBytes, err := json.Marshal(u)
-	tx.Model(&LogEvent{}).Save(&LogEvent{
-		LogEventType:   "ContentWallet",
-		LogEventObject: messageBytes,
-		LogEventId:     u.ID,
-		Collected:      false,
-		CreatedAt:      time.Now(),
-		UpdatedAt:      time.Now(),
-	})
+	// get instance info
+	ip, err := GetPublicIP()
+	if err != nil {
+		return
+	}
+	log := ContentWalletLog{
+		Content:               contentWallet.Content,
+		Wallet:                contentWallet.Wallet,
+		NodeInfo:              GetHostname(),
+		RequesterInfo:         ip,
+		SystemContentWalletId: u.ID,
+		CreatedAt:             time.Now(),
+		UpdatedAt:             time.Now(),
+	}
+
+	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
+		ObjectType: "ContentWalletLog",
+		Object:     log,
+	}
+
+	messageBytes, err := json.Marshal(deltaMetricsBaseMessage)
+	producer.Publish(messageBytes)
+
 	return
 }
