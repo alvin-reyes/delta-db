@@ -6,12 +6,13 @@ import (
 
 // DeltaStartupLogs action events
 type DeltaStartupLogs struct {
-	ID        int64     `gorm:"primaryKey"` // auto increment
-	NodeInfo  string    `json:"node_info"`
-	OSDetails string    `json:"os_details"`
-	IPAddress string    `json:"ip_address"`
-	CreatedAt time.Time `json:"created_at"` // auto set
-	UpdatedAt time.Time `json:"updated_at"`
+	ID            int64     `gorm:"primaryKey"` // auto increment
+	NodeInfo      string    `json:"node_info"`
+	OSDetails     string    `json:"os_details"`
+	IPAddress     string    `json:"ip_address"`
+	DeltaNodeUuid string    `json:"delta_node_uuid"`
+	CreatedAt     time.Time `json:"created_at"` // auto set
+	UpdatedAt     time.Time `json:"updated_at"`
 }
 
 type DealEndpointRequestLog struct {
