@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2710842f-df65-4d47-827c-7e41be529daa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/db_models/base.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_models/wallet.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content_deal.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal.go" afterDir="false" />
@@ -14,15 +12,11 @@
       <change beforePath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_deal_proposal_parameters.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content_miner.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_miner.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/content_wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/content_wallet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/database.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/instance_meta.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/instance_meta.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/log_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/log_event.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/log_models.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/log_models.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_models/piece_commitment.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/piece_commitment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models/repair_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/repair_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_models/base.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_models/log_event.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/log_models.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messaging/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/messaging/base.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messaging/consumer.go" beforeDir="false" afterPath="$PROJECT_DIR$/messaging/consumer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_models/wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_models/wallet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +43,6 @@
     <setting file="file://$PROJECT_DIR$/messaging/producer.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/messaging/base.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/go.mod" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/main.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/db_models/log_models.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/db_models/content_deal.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/db_models/content.go" root0="FORCE_HIGHLIGHTING" />

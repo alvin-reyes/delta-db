@@ -21,6 +21,13 @@ type PieceCommitment struct {
 
 func (u *PieceCommitment) AfterCreate(tx *gorm.DB) (err error) {
 
+	var instanceFromDb InstanceMeta
+	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
 	var pieceComm PieceCommitment
 	tx.Model(&PieceCommitment{}).Where("id = ?", u.ID).First(&pieceComm)
 
@@ -44,6 +51,7 @@ func (u *PieceCommitment) AfterCreate(tx *gorm.DB) (err error) {
 		NodeInfo:                       GetHostname(),
 		RequesterInfo:                  ip,
 		SystemContentPieceCommitmentId: u.ID,
+		DeltaNodeUuid:                  instanceFromDb.InstanceUuid,
 		CreatedAt:                      time.Now(),
 		UpdatedAt:                      time.Now(),
 	}

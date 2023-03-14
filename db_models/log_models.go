@@ -4,18 +4,7 @@ import (
 	"time"
 )
 
-//
-//type LogEvent struct {
-//	ID             int64     `gorm:"primaryKey"` // auto increment
-//	LogEventType   string    `json:"log_event"`  // content, deal, piece_commitment, upload, miner, info
-//	LogEventObject string    `json:"event_object"`
-//	LogEventId     int64     `json:"log_event_id"` // object id
-//	LogEvent       string    `json:"log_event"`    // description
-//	CreatedAt      time.Time `json:"created_at"`   // auto set
-//	UpdatedAt      time.Time `json:"updated_at"`
-//}
-
-// action events
+// DeltaStartupLogs action events
 type DeltaStartupLogs struct {
 	ID        int64     `gorm:"primaryKey"` // auto increment
 	NodeInfo  string    `json:"node_info"`
@@ -128,6 +117,7 @@ type InstanceMetaJobLog struct {
 	NodeInfo         string    `json:"node_info"`
 	RequesterInfo    string    `json:"requester_info"`
 	RequestingApiKey string    `json:"requesting_api_key"`
+	DeltaNodeUuid    string    `json:"delta_node_uuid"`
 	CreatedAt        time.Time `json:"created_at"` // auto set
 	UpdatedAt        time.Time `json:"updated_at"`
 }
@@ -145,6 +135,7 @@ type ContentLog struct {
 	LastMessage       string    `json:"last_message"`
 	NodeInfo          string    `json:"node_info"`
 	RequesterInfo     string    `json:"requester_info"`
+	DeltaNodeUuid     string    `json:"delta_node_uuid"`
 	SystemContentId   int64     `json:"system_content_id"`
 	CreatedAt         time.Time `json:"created_at"` // auto set
 	UpdatedAt         time.Time `json:"updated_at"`
@@ -173,6 +164,7 @@ type ContentDealLog struct {
 	NodeInfo            string    `json:"node_info"`
 	RequesterInfo       string    `json:"requester_info"`
 	RequestingApiKey    string    `json:"requesting_api_key"`
+	DeltaNodeUuid       string    `json:"delta_node_uuid"`
 	SystemContentDealId int64     `json:"system_content_deal_id"`
 	CreatedAt           time.Time `json:"created_at"` // auto set
 	UpdatedAt           time.Time `json:"updated_at"`
@@ -185,6 +177,7 @@ type ContentMinerLog struct {
 	NodeInfo             string    `json:"node_info"`
 	RequesterInfo        string    `json:"requester_info"`
 	RequestingApiKey     string    `json:"requesting_api_key"`
+	DeltaNodeUuid        string    `json:"delta_node_uuid"`
 	SystemContentMinerId int64     `json:"system_content_miner_id"`
 	CreatedAt            time.Time `json:"created_at"` // auto set
 	UpdatedAt            time.Time `json:"updated_at"`
@@ -197,6 +190,7 @@ type ContentWalletLog struct {
 	NodeInfo              string    `json:"node_info"`
 	RequesterInfo         string    `json:"requester_info"`
 	RequestingApiKey      string    `json:"requesting_api_key"`
+	DeltaNodeUuid         string    `json:"delta_node_uuid"`
 	SystemContentWalletId int64     `json:"system_content_miner_id"`
 	CreatedAt             time.Time `json:"created_at"` // auto set
 	UpdatedAt             time.Time `json:"updated_at"`
@@ -214,6 +208,7 @@ type PieceCommitmentLog struct {
 	NodeInfo                       string    `json:"node_info"`
 	RequesterInfo                  string    `json:"requester_info"`
 	RequestingApiKey               string    `json:"requesting_api_key"`
+	DeltaNodeUuid                  string    `json:"delta_node_uuid"`
 	SystemContentPieceCommitmentId int64     `json:"system_content_piece_commitment_id"`
 	CreatedAt                      time.Time `json:"created_at"` // auto set
 	UpdatedAt                      time.Time `json:"updated_at"`
@@ -228,6 +223,7 @@ type ContentDealProposalLog struct {
 	NodeInfo                    string    `json:"node_info"`
 	RequesterInfo               string    `json:"requester_info"`
 	RequestingApiKey            string    `json:"requesting_api_key"`
+	DeltaNodeUuid               string    `json:"delta_node_uuid"`
 	SystemContentDealProposalId int64     `json:"system_content_deal_proposal_id"`
 	CreatedAt                   time.Time `json:"created_at"` // auto set
 	UpdatedAt                   time.Time `json:"updated_at"`
@@ -246,6 +242,7 @@ type ContentDealProposalParametersLog struct {
 	NodeInfo                              string    `json:"node_info"`
 	RequesterInfo                         string    `json:"requester_info"`
 	RequestingApiKey                      string    `json:"requesting_api_key"`
+	DeltaNodeUuid                         string    `json:"delta_node_uuid"`
 	SystemContentDealProposalParametersId int64     `json:"system_content_deal_proposal_id"`
 	CreatedAt                             time.Time `json:"created_at"` // auto set
 	UpdatedAt                             time.Time `json:"updated_at"`
@@ -261,6 +258,7 @@ type WalletLog struct {
 	NodeInfo         string    `json:"node_info"`
 	RequesterInfo    string    `json:"requester_info"`
 	RequestingApiKey string    `json:"requesting_api_key"`
+	DeltaNodeUuid    string    `json:"delta_node_uuid"`
 	SystemWalletId   int64     `json:"system_content_deal_proposal_id"`
 	CreatedAt        time.Time `json:"created_at"` // auto set
 	UpdatedAt        time.Time `json:"updated_at"`

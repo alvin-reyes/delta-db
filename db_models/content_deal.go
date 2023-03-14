@@ -32,6 +32,13 @@ type ContentDeal struct {
 
 func (u *ContentDeal) AfterCreate(tx *gorm.DB) (err error) {
 
+	var instanceFromDb InstanceMeta
+	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
 	var contentDealLog ContentDeal
 	tx.Model(&ContentDeal{}).Where("id = ?", u.ID).First(&contentDealLog)
 
@@ -62,6 +69,7 @@ func (u *ContentDeal) AfterCreate(tx *gorm.DB) (err error) {
 		LastMessage:         contentDealLog.LastMessage,
 		DealProtocolVersion: contentDealLog.DealProtocolVersion,
 		MinerVersion:        contentDealLog.MinerVersion,
+		DeltaNodeUuid:       instanceFromDb.InstanceUuid,
 		NodeInfo:            GetHostname(),
 		RequesterInfo:       ip,
 		SystemContentDealId: contentDealLog.ID,

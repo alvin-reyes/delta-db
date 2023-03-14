@@ -16,6 +16,13 @@ type ContentMiner struct {
 
 func (u *ContentMiner) AfterCreate(tx *gorm.DB) (err error) {
 
+	var instanceFromDb InstanceMeta
+	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
 	var contentMiner ContentMiner
 	tx.Model(&ContentMiner{}).Where("id = ?", u.ID).First(&contentMiner)
 
@@ -35,6 +42,7 @@ func (u *ContentMiner) AfterCreate(tx *gorm.DB) (err error) {
 		NodeInfo:             GetHostname(),
 		RequesterInfo:        ip,
 		SystemContentMinerId: u.ID,
+		DeltaNodeUuid:        instanceFromDb.InstanceUuid,
 		CreatedAt:            time.Now(),
 		UpdatedAt:            time.Now(),
 	}

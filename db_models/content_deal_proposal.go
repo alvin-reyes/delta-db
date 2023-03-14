@@ -18,6 +18,13 @@ type ContentDealProposal struct {
 
 func (u *ContentDealProposal) AfterCreate(tx *gorm.DB) (err error) {
 
+	var instanceFromDb InstanceMeta
+	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
 	var contentDealProposal ContentDealProposal
 	tx.Model(&ContentDealProposal{}).Where("id = ?", u.ID).First(&contentDealProposal)
 
@@ -38,6 +45,7 @@ func (u *ContentDealProposal) AfterCreate(tx *gorm.DB) (err error) {
 		Meta:                        contentDealProposal.Meta,
 		NodeInfo:                    GetHostname(),
 		RequesterInfo:               ip,
+		DeltaNodeUuid:               instanceFromDb.InstanceUuid,
 		SystemContentDealProposalId: u.ID,
 		CreatedAt:                   time.Now(),
 		UpdatedAt:                   time.Now(),

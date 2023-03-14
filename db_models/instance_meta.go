@@ -7,6 +7,7 @@ import (
 type InstanceMeta struct {
 	// gorm id
 	ID                               int64     `gorm:"primary_key" json:"id"`
+	InstanceUuid                     string    `json:"instance_uuid"`
 	InstanceHostName                 string    `json:"instance_host_name"`
 	InstanceNodeName                 string    `json:"instance_node_name"`
 	OSDetails                        string    `json:"os_details"`

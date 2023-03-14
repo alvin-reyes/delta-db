@@ -22,6 +22,13 @@ type Content struct {
 
 func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 
+	var instanceFromDb InstanceMeta
+	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
 	var contentFromDb Content
 	tx.Model(&Content{}).Where("id = ?", u.ID).First(&contentFromDb)
 
@@ -45,6 +52,7 @@ func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 		LastMessage:       contentFromDb.LastMessage,
 		NodeInfo:          GetHostname(),
 		RequesterInfo:     ip,
+		DeltaNodeUuid:     instanceFromDb.InstanceUuid,
 		SystemContentId:   contentFromDb.ID,
 		CreatedAt:         time.Now(),
 		UpdatedAt:         time.Now(),

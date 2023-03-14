@@ -22,6 +22,13 @@ type ContentDealProposalParameters struct {
 
 func (u *ContentDealProposalParameters) AfterCreate(tx *gorm.DB) (err error) {
 
+	var instanceFromDb InstanceMeta
+	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
 	var contentDealProposalParams ContentDealProposalParameters
 	tx.Model(&ContentDealProposalParameters{}).Where("id = ?", u.ID).First(&contentDealProposalParams)
 
@@ -45,6 +52,7 @@ func (u *ContentDealProposalParameters) AfterCreate(tx *gorm.DB) (err error) {
 		SkipIPNIAnnounce:                      contentDealProposalParams.SkipIPNIAnnounce,
 		NodeInfo:                              GetHostname(),
 		RequesterInfo:                         ip,
+		DeltaNodeUuid:                         instanceFromDb.InstanceUuid,
 		SystemContentDealProposalParametersId: u.ID,
 		CreatedAt:                             time.Now(),
 		UpdatedAt:                             time.Now(),

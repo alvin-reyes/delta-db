@@ -19,6 +19,14 @@ type Wallet struct {
 }
 
 func (u *Wallet) AfterCreate(tx *gorm.DB) (err error) {
+
+	var instanceFromDb InstanceMeta
+	tx.Model(&InstanceMeta{}).Where("id = ?", 1).First(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
 	var walletFromDb Wallet
 	tx.Model(&Wallet{}).Where("id = ?", u.ID).First(&walletFromDb)
 
@@ -40,6 +48,7 @@ func (u *Wallet) AfterCreate(tx *gorm.DB) (err error) {
 		NodeInfo:       GetHostname(),
 		RequesterInfo:  ip,
 		SystemWalletId: u.ID,
+		DeltaNodeUuid:  instanceFromDb.InstanceUuid,
 		CreatedAt:      time.Now(),
 		UpdatedAt:      time.Now(),
 	}
