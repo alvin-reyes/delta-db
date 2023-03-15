@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// time series log events
+// Wallet time series log events
 type Wallet struct {
 	ID         int64     `gorm:"primaryKey"`
 	UuId       string    `json:"uuid"`
