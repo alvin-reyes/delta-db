@@ -23,7 +23,7 @@ type ContentDealProposalParameters struct {
 func (u *ContentDealProposalParameters) AfterCreate(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
-	tx.Model(&InstanceMeta{}).Where("id > 0").First(&instanceFromDb)
+	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)
 
 	if instanceFromDb.ID == 0 {
 		return

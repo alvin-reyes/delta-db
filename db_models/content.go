@@ -24,7 +24,7 @@ func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
 	// get the latest instance info based on created_at
-	tx.Model(&InstanceMeta{}).Where("id > 0").First(&instanceFromDb)
+	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)
 
 	if instanceFromDb.ID == 0 {
 		return

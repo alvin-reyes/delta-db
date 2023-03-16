@@ -33,6 +33,9 @@ type ContentDeal struct {
 func (u *ContentDeal) AfterCreate(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
+	// get the latest instance uuid
+	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)
+
 	tx.Model(&InstanceMeta{}).Where("id > 0").First(&instanceFromDb)
 
 	if instanceFromDb.ID == 0 {
