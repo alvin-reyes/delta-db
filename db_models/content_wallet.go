@@ -36,8 +36,8 @@ func (u *ContentWallet) AfterCreate(tx *gorm.DB) (err error) {
 		return
 	}
 	log := ContentWalletLog{
-		Content:               contentWallet.Content,
-		Wallet:                contentWallet.Wallet,
+		Content:               u.Content,
+		Wallet:                u.Wallet,
 		NodeInfo:              GetHostname(),
 		RequesterInfo:         ip,
 		SystemContentWalletId: u.ID,

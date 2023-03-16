@@ -43,14 +43,14 @@ func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 	}
 
 	log := ContentLog{
-		Name:              contentFromDb.Name,
-		Size:              contentFromDb.Size,
-		Cid:               contentFromDb.Cid,
-		RequestingApiKey:  contentFromDb.RequestingApiKey,
-		PieceCommitmentId: contentFromDb.PieceCommitmentId,
-		Status:            contentFromDb.Status,
-		ConnectionMode:    contentFromDb.ConnectionMode,
-		LastMessage:       contentFromDb.LastMessage,
+		Name:              u.Name,
+		Size:              u.Size,
+		Cid:               u.Cid,
+		RequestingApiKey:  u.RequestingApiKey,
+		PieceCommitmentId: u.PieceCommitmentId,
+		Status:            u.Status,
+		ConnectionMode:    u.ConnectionMode,
+		LastMessage:       u.LastMessage,
 		NodeInfo:          GetHostname(),
 		RequesterInfo:     ip,
 		DeltaNodeUuid:     instanceFromDb.InstanceUuid,

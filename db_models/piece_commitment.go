@@ -41,13 +41,13 @@ func (u *PieceCommitment) AfterCreate(tx *gorm.DB) (err error) {
 		return
 	}
 	log := PieceCommitmentLog{
-		Cid:                            pieceComm.Cid,
-		Piece:                          pieceComm.Piece,
-		Size:                           pieceComm.Size,
-		PaddedPieceSize:                pieceComm.PaddedPieceSize,
-		UnPaddedPieceSize:              pieceComm.UnPaddedPieceSize,
-		Status:                         pieceComm.Status,
-		LastMessage:                    pieceComm.LastMessage,
+		Cid:                            u.Cid,
+		Piece:                          u.Piece,
+		Size:                           u.Size,
+		PaddedPieceSize:                u.PaddedPieceSize,
+		UnPaddedPieceSize:              u.UnPaddedPieceSize,
+		Status:                         u.Status,
+		LastMessage:                    u.LastMessage,
 		NodeInfo:                       GetHostname(),
 		RequesterInfo:                  ip,
 		SystemContentPieceCommitmentId: u.ID,

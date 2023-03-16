@@ -40,9 +40,9 @@ func (u *Wallet) AfterCreate(tx *gorm.DB) (err error) {
 	}
 
 	log := WalletLog{
-		UuId:           walletFromDb.UuId,
-		Addr:           walletFromDb.Addr,
-		Owner:          walletFromDb.Owner,
+		UuId:           u.UuId,
+		Addr:           u.Addr,
+		Owner:          u.Owner,
 		KeyType:        "REDACTED",
 		PrivateKey:     "REDACTED",
 		NodeInfo:       GetHostname(),

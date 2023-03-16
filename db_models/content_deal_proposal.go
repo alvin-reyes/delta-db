@@ -39,10 +39,10 @@ func (u *ContentDealProposal) AfterCreate(tx *gorm.DB) (err error) {
 	}
 
 	log := ContentDealProposalLog{
-		Content:                     contentDealProposal.Content,
-		Unsigned:                    contentDealProposal.Unsigned,
-		Signed:                      contentDealProposal.Signed,
-		Meta:                        contentDealProposal.Meta,
+		Content:                     u.Content,
+		Unsigned:                    u.Unsigned,
+		Signed:                      u.Signed,
+		Meta:                        u.Meta,
 		NodeInfo:                    GetHostname(),
 		RequesterInfo:               ip,
 		DeltaNodeUuid:               instanceFromDb.InstanceUuid,

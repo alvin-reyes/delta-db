@@ -42,14 +42,14 @@ func (u *ContentDealProposalParameters) AfterCreate(tx *gorm.DB) (err error) {
 		return
 	}
 	log := ContentDealProposalParametersLog{
-		Content:                               contentDealProposalParams.Content,
-		Label:                                 contentDealProposalParams.Label,
-		Duration:                              contentDealProposalParams.Duration,
-		StartEpoch:                            contentDealProposalParams.StartEpoch,
-		EndEpoch:                              contentDealProposalParams.EndEpoch,
-		TransferParams:                        contentDealProposalParams.TransferParams,
-		RemoveUnsealedCopy:                    contentDealProposalParams.RemoveUnsealedCopy,
-		SkipIPNIAnnounce:                      contentDealProposalParams.SkipIPNIAnnounce,
+		Content:                               u.Content,
+		Label:                                 u.Label,
+		Duration:                              u.Duration,
+		StartEpoch:                            u.StartEpoch,
+		EndEpoch:                              u.EndEpoch,
+		TransferParams:                        u.TransferParams,
+		RemoveUnsealedCopy:                    u.RemoveUnsealedCopy,
+		SkipIPNIAnnounce:                      u.SkipIPNIAnnounce,
 		NodeInfo:                              GetHostname(),
 		RequesterInfo:                         ip,
 		DeltaNodeUuid:                         instanceFromDb.InstanceUuid,

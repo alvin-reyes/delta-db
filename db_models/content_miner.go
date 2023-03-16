@@ -37,8 +37,8 @@ func (u *ContentMiner) AfterCreate(tx *gorm.DB) (err error) {
 	}
 
 	log := ContentMinerLog{
-		Content:              contentMiner.Content,
-		Miner:                contentMiner.Miner,
+		Content:              u.Content,
+		Miner:                u.Miner,
 		NodeInfo:             GetHostname(),
 		RequesterInfo:        ip,
 		SystemContentMinerId: u.ID,
