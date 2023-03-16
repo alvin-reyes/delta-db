@@ -54,7 +54,7 @@ func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 		NodeInfo:          GetHostname(),
 		RequesterInfo:     ip,
 		DeltaNodeUuid:     instanceFromDb.InstanceUuid,
-		SystemContentId:   contentFromDb.ID,
+		SystemContentId:   u.ID,
 		CreatedAt:         time.Now(),
 		UpdatedAt:         time.Now(),
 	}
