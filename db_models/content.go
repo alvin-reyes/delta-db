@@ -14,6 +14,7 @@ type Content struct {
 	RequestingApiKey  string    `json:"requesting_api_key,omitempty"`
 	PieceCommitmentId int64     `json:"piece_commitment_id,omitempty"`
 	Status            string    `json:"status"`
+	RequestType       string    `json:"request_type"`    // default signed, or unsigned
 	ConnectionMode    string    `json:"connection_mode"` // offline or online
 	LastMessage       string    `json:"last_message"`
 	CreatedAt         time.Time `json:"created_at"`
