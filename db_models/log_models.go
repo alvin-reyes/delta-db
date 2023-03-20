@@ -264,3 +264,35 @@ type WalletLog struct {
 	CreatedAt        time.Time `json:"created_at"` // auto set
 	UpdatedAt        time.Time `json:"updated_at"`
 }
+
+type InstanceMetaLog struct {
+	// gorm id
+	ID                               int64     `gorm:"primary_key" json:"id"`
+	InstanceUuid                     string    `json:"instance_uuid"`
+	InstanceHostName                 string    `json:"instance_host_name"`
+	InstanceNodeName                 string    `json:"instance_node_name"`
+	OSDetails                        string    `json:"os_details"`
+	PublicIp                         string    `json:"public_ip"`
+	MemoryLimit                      uint64    `json:"memory_limit"`
+	CpuLimit                         uint64    `json:"cpu_limit"`
+	StorageLimit                     uint64    `json:"storage_limit"`
+	DisableRequest                   bool      `json:"disable_requests"`
+	DisableCommitmentPieceGeneration bool      `json:"disable_commitment_piece_generation"`
+	DisableStorageDeal               bool      `json:"disable_storage_deal"`
+	DisableOnlineDeals               bool      `json:"disable_online_deals"`
+	DisableOfflineDeals              bool      `json:"disable_offline_deals"`
+	NumberOfCpus                     uint64    `json:"number_of_cpus"`
+	StorageInBytes                   uint64    `json:"storage_in_bytes"`
+	SystemMemory                     uint64    `json:"system_memory"`
+	HeapMemory                       uint64    `json:"heap_memory"`
+	HeapInUse                        uint64    `json:"heap_in_use"`
+	StackInUse                       uint64    `json:"stack_in_use"`
+	InstanceStart                    time.Time `json:"instance_start"`
+	BytesPerCpu                      uint64    `json:"bytes_per_cpu"`
+	NodeInfo                         string    `json:"node_info"`
+	RequesterInfo                    string    `json:"requester_info"`
+	DeltaNodeUuid                    string    `json:"delta_node_uuid"`
+	SystemInstanceMetaId             int64     `json:"system_instance_meta_id"`
+	CreatedAt                        time.Time `json:"created_at"`
+	UpdatedAt                        time.Time `json:"updated_at"`
+}

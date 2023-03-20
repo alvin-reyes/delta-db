@@ -1,6 +1,8 @@
 package db_models
 
 import (
+	"encoding/json"
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -30,4 +32,70 @@ type InstanceMeta struct {
 	BytesPerCpu                      uint64    `json:"bytes_per_cpu"`
 	CreatedAt                        time.Time `json:"created_at"`
 	UpdatedAt                        time.Time `json:"updated_at"`
+}
+
+func (u *InstanceMeta) AfterSave(tx *gorm.DB) (err error) {
+
+	var instanceFromDb InstanceMeta
+	// get the latest instance info based on created_at
+	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)
+
+	if instanceFromDb.ID == 0 {
+		return
+	}
+
+	var contentFromDb Content
+	tx.Model(&Content{}).Where("id = ?", u.ID).First(&contentFromDb)
+
+	if contentFromDb.ID == 0 {
+		return
+	}
+	// get instance info
+	ip, err := GetPublicIP()
+	if err != nil {
+		return
+	}
+
+	log := InstanceMetaLog{
+		InstanceUuid:                     u.InstanceUuid,
+		InstanceHostName:                 u.InstanceHostName,
+		InstanceNodeName:                 u.InstanceNodeName,
+		OSDetails:                        u.OSDetails,
+		PublicIp:                         u.PublicIp,
+		MemoryLimit:                      u.MemoryLimit,
+		CpuLimit:                         u.CpuLimit,
+		StorageLimit:                     u.StorageLimit,
+		DisableRequest:                   u.DisableRequest,
+		DisableCommitmentPieceGeneration: u.DisableCommitmentPieceGeneration,
+		DisableStorageDeal:               u.DisableStorageDeal,
+		DisableOnlineDeals:               u.DisableOnlineDeals,
+		DisableOfflineDeals:              u.DisableOfflineDeals,
+		NumberOfCpus:                     u.NumberOfCpus,
+		StorageInBytes:                   u.StorageInBytes,
+		SystemMemory:                     u.SystemMemory,
+		HeapMemory:                       u.HeapMemory,
+		HeapInUse:                        u.HeapInUse,
+		StackInUse:                       u.StackInUse,
+		InstanceStart:                    u.InstanceStart,
+		BytesPerCpu:                      u.BytesPerCpu,
+		NodeInfo:                         GetHostname(),
+		RequesterInfo:                    ip,
+		DeltaNodeUuid:                    instanceFromDb.InstanceUuid,
+		SystemInstanceMetaId:             u.ID,
+		CreatedAt:                        time.Now(),
+		UpdatedAt:                        time.Now(),
+	}
+
+	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
+		ObjectType: "InstanceMetaLog",
+		Object:     log,
+	}
+
+	messageBytes, err := json.Marshal(deltaMetricsBaseMessage)
+	if err != nil {
+		return err
+	}
+	producer.Publish(messageBytes)
+
+	return
 }
