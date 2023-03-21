@@ -187,7 +187,7 @@ type ContentMinerLog struct {
 type ContentWalletLog struct {
 	ID                    int64     `gorm:"primaryKey"`
 	Content               int64     `json:"content" gorm:"index:,option:CONCURRENTLY"`
-	Wallet                string    `json:"wallet_meta"`
+	WalletId              int64     `json:"wallet_id" gorm:"index:,option:CONCURRENTLY"`
 	NodeInfo              string    `json:"node_info"`
 	RequesterInfo         string    `json:"requester_info"`
 	RequestingApiKey      string    `json:"requesting_api_key"`

@@ -9,7 +9,7 @@ import (
 type ContentWallet struct {
 	ID        int64     `gorm:"primaryKey"`
 	Content   int64     `json:"content" gorm:"index:,option:CONCURRENTLY"`
-	Wallet    string    `json:"wallet_meta"`
+	WalletId  int64     `json:"wallet_id" gorm:"index:,option:CONCURRENTLY"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -37,7 +37,7 @@ func (u *ContentWallet) AfterCreate(tx *gorm.DB) (err error) {
 	}
 	log := ContentWalletLog{
 		Content:               u.Content,
-		Wallet:                u.Wallet,
+		WalletId:              u.WalletId,
 		NodeInfo:              GetHostname(),
 		RequesterInfo:         ip,
 		SystemContentWalletId: u.ID,
