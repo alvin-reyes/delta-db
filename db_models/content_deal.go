@@ -30,7 +30,7 @@ type ContentDeal struct {
 	UpdatedAt           time.Time `json:"updated_at"`
 }
 
-func (u *ContentDeal) AfterCreate(tx *gorm.DB) (err error) {
+func (u *ContentDeal) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
 	// get the latest instance uuid

@@ -16,7 +16,7 @@ type ContentDealProposal struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func (u *ContentDealProposal) AfterCreate(tx *gorm.DB) (err error) {
+func (u *ContentDealProposal) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
 	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)

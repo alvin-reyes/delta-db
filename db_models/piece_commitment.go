@@ -19,7 +19,7 @@ type PieceCommitment struct {
 	UpdatedAt         time.Time `json:"updated_at"`
 }
 
-func (u *PieceCommitment) AfterCreate(tx *gorm.DB) (err error) {
+func (u *PieceCommitment) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
 	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)

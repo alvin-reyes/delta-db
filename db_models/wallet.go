@@ -18,7 +18,7 @@ type Wallet struct {
 	UpdatedAt  time.Time `json:"updated_at"`
 }
 
-func (u *Wallet) AfterCreate(tx *gorm.DB) (err error) {
+func (u *Wallet) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
 	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)

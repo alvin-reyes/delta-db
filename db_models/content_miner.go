@@ -14,7 +14,7 @@ type ContentMiner struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func (u *ContentMiner) AfterCreate(tx *gorm.DB) (err error) {
+func (u *ContentMiner) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
 	tx.Raw("SELECT * FROM instance_meta ORDER BY id DESC LIMIT 1").Scan(&instanceFromDb)
