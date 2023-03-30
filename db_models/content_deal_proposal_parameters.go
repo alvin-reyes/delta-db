@@ -16,6 +16,7 @@ type ContentDealProposalParameters struct {
 	TransferParams     string    `json:"transfer_params,omitempty"`
 	RemoveUnsealedCopy bool      `json:"remove_unsealed_copy,omitempty"`
 	SkipIPNIAnnounce   bool      `json:"skip_ipni_announce,omitempty"`
+	VerifiedDeal       bool      `json:"verified_deal,omitempty"`
 	CreatedAt          time.Time `json:"created_at" json:"created-at"`
 	UpdatedAt          time.Time `json:"updated_at" json:"updated-at"`
 }
@@ -50,6 +51,7 @@ func (u *ContentDealProposalParameters) AfterSave(tx *gorm.DB) (err error) {
 		TransferParams:                        u.TransferParams,
 		RemoveUnsealedCopy:                    u.RemoveUnsealedCopy,
 		SkipIPNIAnnounce:                      u.SkipIPNIAnnounce,
+		VerifiedDeal:                          u.VerifiedDeal,
 		NodeInfo:                              GetHostname(),
 		RequesterInfo:                         ip,
 		DeltaNodeUuid:                         instanceFromDb.InstanceUuid,
