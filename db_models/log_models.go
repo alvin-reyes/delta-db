@@ -133,6 +133,7 @@ type ContentLog struct {
 	PieceCommitmentId int64     `json:"piece_commitment_id,omitempty"`
 	Status            string    `json:"status"`
 	ConnectionMode    string    `json:"connection_mode"` // offline or online
+	AutoRetry         bool      `json:"auto_retry"`
 	LastMessage       string    `json:"last_message"`
 	NodeInfo          string    `json:"node_info"`
 	RequesterInfo     string    `json:"requester_info"`

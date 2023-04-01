@@ -16,6 +16,7 @@ type Content struct {
 	Status            string    `json:"status"`
 	RequestType       string    `json:"request_type"`    // default signed, or unsigned
 	ConnectionMode    string    `json:"connection_mode"` // offline or online
+	AutoRetry         bool      `json:"auto_retry"`
 	LastMessage       string    `json:"last_message"`
 	CreatedAt         time.Time `json:"created_at"`
 	UpdatedAt         time.Time `json:"updated_at"`
@@ -52,6 +53,7 @@ func (u *Content) AfterSave(tx *gorm.DB) (err error) {
 		Status:            u.Status,
 		ConnectionMode:    u.ConnectionMode,
 		LastMessage:       u.LastMessage,
+		AutoRetry:         u.AutoRetry,
 		NodeInfo:          GetHostname(),
 		RequesterInfo:     ip,
 		DeltaNodeUuid:     instanceFromDb.InstanceUuid,
