@@ -238,9 +238,9 @@ type ContentDealProposalParametersLog struct {
 	StartEpoch                            int64     `json:"start_epoch,omitempty"`
 	EndEpoch                              int64     `json:"end_epoch,omitempty"`
 	TransferParams                        string    `json:"transfer_params,omitempty"`
-	RemoveUnsealedCopy                    bool      `json:"remove_unsealed_copy,omitempty"`
-	SkipIPNIAnnounce                      bool      `json:"skip_ipni_announce,omitempty"`
-	VerifiedDeal                          bool      `json:"verified_deal,omitempty"`
+	RemoveUnsealedCopy                    bool      `json:"remove_unsealed_copy"`
+	SkipIPNIAnnounce                      bool      `json:"skip_ipni_announce"`
+	VerifiedDeal                          bool      `json:"verified_deal"`
 	NodeInfo                              string    `json:"node_info"`
 	RequesterInfo                         string    `json:"requester_info"`
 	RequestingApiKey                      string    `json:"requesting_api_key"`

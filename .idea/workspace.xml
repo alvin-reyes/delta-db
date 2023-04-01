@@ -45,6 +45,9 @@
     <setting file="file://$PROJECT_DIR$/db_models/content_wallet.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/db_models/content_miner.go" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="minikube" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>

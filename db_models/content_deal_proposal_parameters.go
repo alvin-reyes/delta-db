@@ -14,9 +14,9 @@ type ContentDealProposalParameters struct {
 	StartEpoch         int64     `json:"start_epoch,omitempty"`
 	EndEpoch           int64     `json:"end_epoch,omitempty"`
 	TransferParams     string    `json:"transfer_params,omitempty"`
-	RemoveUnsealedCopy bool      `json:"remove_unsealed_copy,omitempty"`
-	SkipIPNIAnnounce   bool      `json:"skip_ipni_announce,omitempty"`
-	VerifiedDeal       bool      `json:"verified_deal,omitempty"`
+	RemoveUnsealedCopy bool      `json:"remove_unsealed_copy"`
+	SkipIPNIAnnounce   bool      `json:"skip_ipni_announce"`
+	VerifiedDeal       bool      `json:"verified_deal"`
 	CreatedAt          time.Time `json:"created_at" json:"created-at"`
 	UpdatedAt          time.Time `json:"updated_at" json:"updated-at"`
 }
