@@ -7,18 +7,19 @@ import (
 )
 
 type ContentDealProposalParameters struct {
-	ID                 int64     `gorm:"primaryKey"`
-	Content            int64     `json:"content" gorm:"index:,option:CONCURRENTLY"`
-	Label              string    `json:"label,omitempty"`
-	Duration           int64     `json:"duration,omitempty"`
-	StartEpoch         int64     `json:"start_epoch,omitempty"`
-	EndEpoch           int64     `json:"end_epoch,omitempty"`
-	TransferParams     string    `json:"transfer_params,omitempty"`
-	RemoveUnsealedCopy bool      `json:"remove_unsealed_copy"`
-	SkipIPNIAnnounce   bool      `json:"skip_ipni_announce"`
-	VerifiedDeal       bool      `json:"verified_deal"`
-	CreatedAt          time.Time `json:"created_at" json:"created-at"`
-	UpdatedAt          time.Time `json:"updated_at" json:"updated-at"`
+	ID                     int64     `gorm:"primaryKey"`
+	Content                int64     `json:"content" gorm:"index:,option:CONCURRENTLY"`
+	Label                  string    `json:"label,omitempty"`
+	Duration               int64     `json:"duration,omitempty"`
+	StartEpoch             int64     `json:"start_epoch,omitempty"`
+	EndEpoch               int64     `json:"end_epoch,omitempty"`
+	TransferParams         string    `json:"transfer_params,omitempty"`
+	RemoveUnsealedCopy     bool      `json:"remove_unsealed_copy"`
+	SkipIPNIAnnounce       bool      `json:"skip_ipni_announce"`
+	VerifiedDeal           bool      `json:"verified_deal"`
+	UnverifiedDealMaxPrice int64     `json:"unverified_deal_max_price"`
+	CreatedAt              time.Time `json:"created_at" json:"created-at"`
+	UpdatedAt              time.Time `json:"updated_at" json:"updated-at"`
 }
 
 func (u *ContentDealProposalParameters) AfterSave(tx *gorm.DB) (err error) {
@@ -52,6 +53,7 @@ func (u *ContentDealProposalParameters) AfterSave(tx *gorm.DB) (err error) {
 		RemoveUnsealedCopy:                    u.RemoveUnsealedCopy,
 		SkipIPNIAnnounce:                      u.SkipIPNIAnnounce,
 		VerifiedDeal:                          u.VerifiedDeal,
+		UnverifiedDealMaxPrice:                u.UnverifiedDealMaxPrice,
 		NodeInfo:                              GetHostname(),
 		RequesterInfo:                         ip,
 		DeltaNodeUuid:                         instanceFromDb.InstanceUuid,
