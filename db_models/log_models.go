@@ -242,7 +242,7 @@ type ContentDealProposalParametersLog struct {
 	RemoveUnsealedCopy                    bool      `json:"remove_unsealed_copy"`
 	SkipIPNIAnnounce                      bool      `json:"skip_ipni_announce"`
 	VerifiedDeal                          bool      `json:"verified_deal"`
-	UnverifiedDealMaxPrice                int64     `json:"unverified_deal_max_price,omitempty"`
+	UnverifiedDealMaxPrice                string    `json:"unverified_deal_max_price,omitempty"`
 	NodeInfo                              string    `json:"node_info"`
 	RequesterInfo                         string    `json:"requester_info"`
 	RequestingApiKey                      string    `json:"requesting_api_key"`

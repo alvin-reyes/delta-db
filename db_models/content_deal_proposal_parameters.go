@@ -17,7 +17,7 @@ type ContentDealProposalParameters struct {
 	RemoveUnsealedCopy     bool      `json:"remove_unsealed_copy"`
 	SkipIPNIAnnounce       bool      `json:"skip_ipni_announce"`
 	VerifiedDeal           bool      `json:"verified_deal"`
-	UnverifiedDealMaxPrice int64     `json:"unverified_deal_max_price"`
+	UnverifiedDealMaxPrice string    `json:"unverified_deal_max_price"`
 	CreatedAt              time.Time `json:"created_at" json:"created-at"`
 	UpdatedAt              time.Time `json:"updated_at" json:"updated-at"`
 }
