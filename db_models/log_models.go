@@ -299,3 +299,28 @@ type InstanceMetaLog struct {
 	CreatedAt                        time.Time `json:"created_at"`
 	UpdatedAt                        time.Time `json:"updated_at"`
 }
+
+type BatchImportLog struct {
+	ID                  int64     `gorm:"primaryKey"`
+	Uuid                string    `json:"uuid" gorm:"index:,option:CONCURRENTLY"`
+	Status              string    `json:"status"`
+	NodeInfo            string    `json:"node_info"`
+	RequesterInfo       string    `json:"requester_info"`
+	DeltaNodeUuid       string    `json:"delta_node_uuid"`
+	SystemBatchImportId int64     `json:"system_batch_import_id"`
+	CreatedAt           time.Time `json:"created_at"`
+	UpdatedAt           time.Time `json:"updated_at"`
+}
+
+// BatchContent associate the content to a batch
+type BatchContentLog struct {
+	ID                   int64     `gorm:"primaryKey"`
+	BatchImportID        int64     `json:"batch_import_id" gorm:"index:,option:CONCURRENTLY"`
+	ContentID            int64     `json:"content_id" gorm:"index:,option:CONCURRENTLY"` // check status of the content
+	NodeInfo             string    `json:"node_info"`
+	RequesterInfo        string    `json:"requester_info"`
+	DeltaNodeUuid        string    `json:"delta_node_uuid"`
+	SystemBatchContentId int64     `json:"system_batch_content_id"`
+	CreatedAt            time.Time `json:"created_at"`
+	UpdatedAt            time.Time `json:"updated_at"`
+}
