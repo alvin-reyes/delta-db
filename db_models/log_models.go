@@ -313,7 +313,7 @@ type BatchImportLog struct {
 }
 
 // BatchContent associate the content to a batch
-type BatchContentLog struct {
+type BatchImportContentLog struct {
 	ID                   int64     `gorm:"primaryKey"`
 	BatchImportID        int64     `json:"batch_import_id" gorm:"index:,option:CONCURRENTLY"`
 	ContentID            int64     `json:"content_id" gorm:"index:,option:CONCURRENTLY"` // check status of the content

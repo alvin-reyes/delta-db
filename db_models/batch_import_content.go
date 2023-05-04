@@ -58,7 +58,7 @@ func (u *BatchImport) AfterSave(tx *gorm.DB) (err error) {
 }
 
 // BatchContent associate the content to a batch
-type BatchContent struct {
+type BatchImportContent struct {
 	ID            int64     `gorm:"primaryKey"`
 	BatchImportID int64     `json:"batch_import_id" gorm:"index:,option:CONCURRENTLY"`
 	ContentID     int64     `json:"content_id" gorm:"index:,option:CONCURRENTLY"` // check status of the content
@@ -66,7 +66,7 @@ type BatchContent struct {
 	UpdatedAt     time.Time `json:"updated_at"`
 }
 
-func (u *BatchContent) AfterSave(tx *gorm.DB) (err error) {
+func (u *BatchImportContent) AfterSave(tx *gorm.DB) (err error) {
 
 	var instanceFromDb InstanceMeta
 	// get the latest instance uuid
@@ -84,7 +84,7 @@ func (u *BatchContent) AfterSave(tx *gorm.DB) (err error) {
 		return
 	}
 
-	log := BatchContentLog{
+	log := BatchImportContentLog{
 		BatchImportID:        u.BatchImportID,
 		ContentID:            u.ContentID,
 		NodeInfo:             GetHostname(),
@@ -96,7 +96,7 @@ func (u *BatchContent) AfterSave(tx *gorm.DB) (err error) {
 	}
 
 	deltaMetricsBaseMessage := DeltaMetricsBaseMessage{
-		ObjectType: "BatchContentLog",
+		ObjectType: "BatchImportContentLog",
 		Object:     log,
 	}
 
